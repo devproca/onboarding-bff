@@ -1,0 +1,19 @@
+<form>
+  <div [formGroup]="formGroup">
+    <div class="form-group">
+      <label for="firstName">First name</label>
+      <input formControlName="firstName" type="text" class="form-control" id="firstName">
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last name</label>
+      <input formControlName="lastName" type="text" class="form-control" id="lastName">
+    </div>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input formControlName="username" type="text" class="form-control" id="username">
+    </div>
+  </div>
+
+  <button class="btn btn-primary" (click)="save()">Save</button>
+</form>
+
