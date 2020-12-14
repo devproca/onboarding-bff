@@ -1,0 +1,23 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Phone Number</th>
+    <th>Verified</th>
+    <th></th>
+    <th>Actions</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let phone of phones" routerLinkActive="active">
+    <td>{{phone.phoneNumber}}</td>
+    <td>{{phone.verified}}</td>
+    <td><button class="btn btn-warning" [disabled]="phone.verified" routerLink="/verify/{{phone.phoneId}}" userId="phone.userId">Verify</button></td>
+    <td><button class="btn btn-primary" routerLink="/phone-detail/{{phone.userId}}/{{phone.phoneId}}">Edit</button></td>
+    <td><button class="btn btn-danger" (click)="delete(phone)">Remove</button></td>
+  </tr>
+  <tr>
+    <td colspan="5" routerLink="/phone-detail/{{userId}}">+ Add a new phone number</td>
+  </tr>
+  </tbody>
+</table>

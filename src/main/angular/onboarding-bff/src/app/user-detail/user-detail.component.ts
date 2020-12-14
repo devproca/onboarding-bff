@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
+import { Location } from '@angular/common';
 import {UserModel} from "../model/user.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {UserService} from "../service/user.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-user-detail',
@@ -12,21 +14,21 @@ export class UserDetailComponent implements OnInit {
 
   formGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,
-              private userService: UserService) {
+  constructor(private route: ActivatedRoute,
+              private formBuilder: FormBuilder,
+              private userService: UserService,
+              private location: Location) {
   }
 
   ngOnInit(): void {
     this.formGroup = this.createFormGroup();
+    const id = this.route.snapshot.paramMap.get('id');
 
-    // const user = {
-    //   firstName: "jess"
-    // }
-    //
-    // setTimeout(() => {
-    //   this.formGroup.patchValue(user);
-    // }, 2000)
-
+    if (id) {
+      this.userService.get(id).subscribe(user => {
+        this.formGroup.patchValue(user);
+      })
+    }
   }
 
   save() {
@@ -36,8 +38,23 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
+  update() {
+    const valueToSave = this.formGroup.value as UserModel;
+    this.userService.update(valueToSave).subscribe(savedUser => {
+      this.goBack();
+    });
+  }
+
+  userId() {
+    return this.formGroup.get("userId").value;
+  }
+
   isCreate() {
-   return !this.formGroup.get("userId");
+   return !this.userId();
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   private createFormGroup(): FormGroup {

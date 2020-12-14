@@ -1,21 +1,28 @@
-<table class="table">
+<table class="table table-hover">
   <thead>
     <tr>
       <th>User id</th>
       <th>First name</th>
       <th>Last name</th>
       <th>Username</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let user of users">
+  <tr *ngFor="let user of users" class="user-list"  routerLinkActive="active">
     <td>{{user.userId}}</td>
     <td>{{user.firstName}}</td>
     <td>{{user.lastName}}</td>
     <td>{{user.username}}</td>
+    <td><button class="btn btn-primary" routerLink="/detail/{{user.userId}}">Edit</button></td>
+    <td><button class="btn btn-danger" (click)="delete(user)">Remove</button></td>
   </tr>
   <tr *ngIf="!loadingSubscription.closed">
-    <td colspan="4">Loading!</td>
+    <td colspan="6">Loading!</td>
+  </tr>
+  <tr>
+    <td colspan="6" routerLink="/detail">+ Add a new user</td>
   </tr>
   </tbody>
 </table>

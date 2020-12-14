@@ -14,6 +14,16 @@
     </div>
   </div>
 
-  <button class="btn btn-primary" (click)="save()">Save</button>
+  <div class="form-group mt-5" *ngIf="!isCreate()">
+<!--  <a  href="#" routerLink="/phones/{{userId()}}">Edit Phone Numbers</a>-->
+    <app-phone-list></app-phone-list>
+  </div>
+
+  <div class="btn-toolbar" role="group">
+    <button *ngIf="isCreate()" class="btn btn-primary" (click)="save()">Save</button>
+    <button *ngIf="!isCreate()" class="btn btn-primary" (click)="update()">Update</button>
+    <button class="btn btn-secondary ml-2" (click)="goBack()">Go Back</button>
+  </div>
+
 </form>
 

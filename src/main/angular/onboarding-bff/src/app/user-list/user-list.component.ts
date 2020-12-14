@@ -16,12 +16,15 @@ export class UserListComponent implements OnInit {
   constructor(private userService: UserService) {
   }
 
-  handleClick() {
-    alert("lskadjflk");
-  }
   ngOnInit(): void {
     this.loadingSubscription = this.userService.findAll().subscribe(users => {
       this.users = users;
+    })
+  }
+
+  delete(user): void{
+    this.userService.delete(user.userId).subscribe(users => {
+      this.users = this.users.filter(u => u != user);
     })
   }
 
