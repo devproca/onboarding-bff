@@ -19,6 +19,7 @@ export class PhoneDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = this.createFormGroup();
+    //change to listen to route changes param map.
     this.userId = this.route.snapshot.paramMap.get('id');
     this.formGroup.patchValue({"userId": this.userId});
 
@@ -50,11 +51,15 @@ export class PhoneDetailComponent implements OnInit {
   }
 
   isCreate(): boolean {
-    return !!!this.formGroup.get('phoneId').value;
+    return !this.formGroup.get('phoneId').value;
   }
 
   goBack() {
     this.location.back();
+  }
+
+  get phoneNumberControl(): FormControl {
+    return this.formGroup.get("phoneNumber") as FormControl;
   }
 
   private createFormGroup(): FormGroup {

@@ -3,14 +3,17 @@
     <div class="form-group">
       <label for="firstName">First name</label>
       <input formControlName="firstName" type="text" class="form-control" id="firstName">
+      <small *ngIf="firstNameControl.errors" class="text-danger">{{firstNameControl.errors.error}}</small>
     </div>
     <div class="form-group">
       <label for="lastName">Last name</label>
       <input formControlName="lastName" type="text" class="form-control" id="lastName">
+      <small *ngIf="lastNameControl.errors" class="text-danger">{{lastNameControl.errors.error}}</small>
     </div>
     <div class="form-group">
       <label for="username">Username</label>
       <input formControlName="username" type="text" class="form-control" id="username">
+      <small *ngIf="userNameControl.errors" class="text-danger">{{userNameControl.errors.error}}</small>
     </div>
   </div>
 

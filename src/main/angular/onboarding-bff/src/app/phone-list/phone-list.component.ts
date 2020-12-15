@@ -29,7 +29,7 @@ export class PhoneListComponent implements OnInit {
   }
 
   delete(phone): void {
-    this.phoneService.delete(phone.userId, phone.phoneId).subscribe(noop => {
+    this.phoneService.delete(phone.userId, phone.phoneId).subscribe(_ => {
       this.phones = this.phones.filter(p => p != phone);
     });
   }
