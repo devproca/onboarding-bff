@@ -33,9 +33,9 @@ export class PhoneService {
     return this.http.delete<PhoneModel>(`${BASE_URI}/${userId}/phone_numbers/${phoneId}`);
   }
 
-  verify(userId, verificationCode): Observable<VerificationCodeModel> {
+  verify(code): Observable<VerificationCodeModel> {
     return this.http.post<VerificationCodeModel>(
-      `${BASE_URI}/${userId}/phone_numbers/${verificationCode.phoneId}/verify`,
-      verificationCode);
+      `${BASE_URI}/${code.userId}/phone_numbers/${code.phoneId}/verify`,
+      code);
   }
 }

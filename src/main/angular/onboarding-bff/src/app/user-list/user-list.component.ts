@@ -12,7 +12,7 @@ export class UserListComponent implements OnInit {
 
   users: UserModel[] = [];
   loadingSubscription = Subscription.EMPTY;
-  myVariable=" hello angular variable";
+
   constructor(private userService: UserService) {
   }
 

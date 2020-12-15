@@ -1,53 +1,76 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Form, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {PhoneModel} from "../model/phone.model";
-import { Location } from '@angular/common';
 import {PhoneService} from "../service/phone.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-phone-detail',
   templateUrl: './phone-detail.component.html',
   styleUrls: ['./phone-detail.component.scss']
 })
-export class PhoneDetailComponent implements OnInit {
+export class PhoneDetailComponent implements OnInit, OnDestroy {
 
   formGroup: FormGroup;
-  userId: string;
+  subscriptions: Subscription[] = [];
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private location: Location, private phoneService: PhoneService) { }
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private formBuilder: FormBuilder,
+              private phoneService: PhoneService) { }
 
   ngOnInit(): void {
     this.formGroup = this.createFormGroup();
-    //change to listen to route changes param map.
-    this.userId = this.route.snapshot.paramMap.get('id');
-    this.formGroup.patchValue({"userId": this.userId});
+    this.registerRouteParamChanges();
+  }
 
-    const phoneId = this.route.snapshot.paramMap.get('phoneId');
+  ngOnDestroy() {
+    this.subscriptions.forEach(s => s.unsubscribe());
+  }
 
+  private registerRouteParamChanges(): void {
+    this.subscriptions.push(
+      this.route.paramMap.subscribe(params => {
+        const userId = params.get("id");
+        const id = params.get("phoneId");
+        this.reloadPhone(userId, id);
+      })
+    );
+  }
+
+  private reloadPhone(userId: string, phoneId: string): void {
     if (phoneId) {
-      this.phoneService.get(this.userId, phoneId).subscribe(phone => {
+      this.phoneService.get(userId, phoneId).subscribe(phone => {
         this.formGroup.patchValue(phone);
       })
+    } else {
+      this.formGroup.reset();
+      this.formGroup.patchValue({"userId": userId });
     }
   }
 
+
   save(): void {
     const valueToSave = this.formGroup.value as PhoneModel;
-    this.phoneService.create(valueToSave).subscribe(savedUser => {
-      console.log("it worked!");
+    this.phoneService.create(valueToSave).subscribe(_ => {
+      this.goBack();
+    }, httpError => {
+      const errors = httpError.error;
+      Object.keys(errors)
+        .forEach(k => this.formGroup.get(k).setErrors({"error": errors[k]}));
     });
   }
 
   update() : void {
     const valueToSave = this.formGroup.value as PhoneModel;
-    this.phoneService.update(valueToSave).subscribe(savedUser => {
+    this.phoneService.update(valueToSave).subscribe(_ => {
       this.goBack();
+    }, httpError => {
+      const errors = httpError.error;
+      Object.keys(errors)
+        .forEach(k => this.formGroup.get(k).setErrors({"error": errors[k]}));
     });
-  }
-
-  isVerified(): boolean {
-    return false;
   }
 
   isCreate(): boolean {
@@ -55,20 +78,27 @@ export class PhoneDetailComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigateByUrl(`detail/${this.userIdControl.value}`);
   }
 
   get phoneNumberControl(): FormControl {
     return this.formGroup.get("phoneNumber") as FormControl;
   }
 
+  get userIdControl(): FormControl {
+    return this.formGroup.get("userId") as FormControl;
+  }
+
+  get isVerifiedControl(): FormControl {
+    return this.formGroup.get("isVerified") as FormControl;
+  }
+
   private createFormGroup(): FormGroup {
-    const phoneNumber = "[0-9]{0-10}";
     return this.formBuilder.group({
       userId: '',
       phoneId: '',
-      phoneNumber: new FormControl('', [Validators.required, Validators.pattern(phoneNumber)]),
-      isVerified: false
+      phoneNumber: '',
+      isVerified: ''
     })
   }
 

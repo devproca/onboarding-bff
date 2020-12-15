@@ -4,6 +4,7 @@
       <div class="form-group">
         <label for="code">Verification Code:</label>
         <input formControlName="code" type="text" class="form-control" id="code">
+        <small *ngIf="codeControl.errors" class="text-danger">{{ codeControl.errors.error }}</small>
       </div>
 
       <div class="btn-toolbar" role="group">

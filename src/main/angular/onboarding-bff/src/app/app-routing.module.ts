@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'phones/:id', component: PhoneListComponent },
   { path: 'phone-detail/:id', component: PhoneDetailComponent },
   { path: 'phone-detail/:id/:phoneId', component: PhoneDetailComponent },
-  { path: 'verify/:phoneId', component: VerifyComponent }
+  { path: 'verify/:id/:phoneId', component: VerifyComponent }
 ];
 
 @NgModule({

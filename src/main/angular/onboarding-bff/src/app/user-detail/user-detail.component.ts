@@ -64,6 +64,10 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     const valueToSave = this.formGroup.value as UserModel;
     this.userService.update(valueToSave).subscribe(savedUser => {
       this.goBack();
+    }, httpError => {
+      const errors = httpError.error;
+      Object.keys(errors)
+        .forEach(k => this.formGroup.get(k).setErrors({"error": errors[k]}));
     });
   }
 
@@ -91,12 +95,18 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     return this.formGroup.get("username") as FormControl;
   }
 
+
+  get phoneNumbers(): FormControl {
+    return this.formGroup.get("phoneNumbers") as FormControl;
+  }
+
   private createFormGroup(): FormGroup {
     return this.formBuilder.group({
       userId: '',
       firstName: '',
       lastName: '',
-      username: ''
+      username: '',
+      phoneNumbers: ''
     });
   }
 }
