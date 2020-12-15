@@ -1,5 +1,6 @@
 package com.onboarding;
 
+import com.onboarding.client.PhoneNumberClient;
 import com.onboarding.client.UserClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,6 +18,12 @@ public class OnboardingWebapp {
 	@ConfigurationProperties(prefix = "app.user-client")
 	public UserClient userClient() {
 		return new UserClient();
+	}
+
+	@Bean
+	@ConfigurationProperties(prefix = "app.phone-client")
+	public PhoneNumberClient phoneNumberClient() {
+		return new PhoneNumberClient();
 	}
 
 }
