@@ -6,19 +6,29 @@ import { AppComponent } from './app.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import {HttpClientModule} from "@angular/common/http";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule} from "@angular/forms";
+import { UserDeleteComponent } from './user-delete/user-delete.component';
+import { UserCreateComponent } from './user-create/user-create.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MainScreenComponent } from './main-screen/main-screen.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserListComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    UserDeleteComponent,
+    UserCreateComponent,
+    MainScreenComponent,
+    UserEditComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    ReactiveFormsModule,
-    AppRoutingModule
+    FormsModule,
+    AppRoutingModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

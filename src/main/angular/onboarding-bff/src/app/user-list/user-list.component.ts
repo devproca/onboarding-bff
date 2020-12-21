@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UserCreateComponent } from '../user-create/user-create.component';
 
 @Component({
   selector: 'app-user-list',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modalController: NgbModal) { }
 
   ngOnInit(): void {
+  }
+  addUser():void {
+    this.modalController.open(UserCreateComponent);
   }
 
 }
