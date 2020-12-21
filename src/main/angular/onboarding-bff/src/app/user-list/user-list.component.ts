@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserCreateComponent } from '../user-create/user-create.component';
-=======
->>>>>>> quinn
 
 @Component({
   selector: 'app-user-list',
@@ -12,7 +9,6 @@ import { UserCreateComponent } from '../user-create/user-create.component';
 })
 export class UserListComponent implements OnInit {
 
-<<<<<<< HEAD
   constructor(private modalController: NgbModal) { }
 
   ngOnInit(): void {
@@ -20,11 +16,5 @@ export class UserListComponent implements OnInit {
   addUser():void {
     this.modalController.open(UserCreateComponent);
   }
-=======
-  constructor() { }
-
-  ngOnInit(): void {
-  }
->>>>>>> quinn
 
 }

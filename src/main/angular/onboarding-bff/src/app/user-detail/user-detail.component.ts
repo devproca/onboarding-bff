@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserDeleteComponent } from '../user-delete/user-delete.component';
 import { UserEditComponent } from '../user-edit/user-edit.component';
-=======
->>>>>>> quinn
 
 @Component({
   selector: 'app-user-detail',
@@ -13,7 +10,6 @@ import { UserEditComponent } from '../user-edit/user-edit.component';
 })
 export class UserDetailComponent implements OnInit {
 
-<<<<<<< HEAD
   constructor(private modalController:NgbModal) { }
 
   ngOnInit(): void {
@@ -24,11 +20,5 @@ export class UserDetailComponent implements OnInit {
   deleteUser():void {
     this.modalController.open(UserDeleteComponent)
   }
-=======
-  constructor() { }
-
-  ngOnInit(): void {
-  }
->>>>>>> quinn
 
 }
