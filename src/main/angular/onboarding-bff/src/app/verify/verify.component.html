@@ -1,0 +1,18 @@
+<form>
+  <div [formGroup]="formGroup">
+
+      <div class="form-group">
+        <label for="code">Verification Code:</label>
+        <input formControlName="code" type="text" class="form-control" id="code">
+        <small *ngIf="codeControl.errors" class="text-danger">{{ codeControl.errors.error }}</small>
+      </div>
+
+      <div class="btn-toolbar" role="group">
+        <div class="input-group-btn">
+          <button class="btn btn-primary" (click)="verify()">Verify Number</button>
+          <button class="btn btn-secondary ml-3" (click)="goBack()">Cancel</button>
+        </div>
+      </div>
+
+  </div>
+</form>
