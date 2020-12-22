@@ -10,7 +10,12 @@ import { UserService } from '../service/user.service';
   styleUrls: ['./user-delete.component.scss'],
 })
 export class UserDeleteComponent implements OnInit {
-  activeUser: UserModel;
+  activeUser: UserModel = {
+    userId:'',
+    username:'',
+    lastName:'',
+    firstName:''
+  };
   activeUserSubscription: Subscription;
   constructor(
     private userService: UserService,
@@ -29,7 +34,7 @@ export class UserDeleteComponent implements OnInit {
       this.activeUserSubscription.unsubscribe();
     }
   }
-  deleteUser() {
+  deleteUser():void {
     this.userService.delete(this.activeUser).subscribe(
       (result) => {
         this.activeModal.close();
@@ -38,5 +43,8 @@ export class UserDeleteComponent implements OnInit {
         //pop up and error or something
       }
     );
+  }
+  userClickedNo():void{
+    this.activeModal.close();
   }
 }

@@ -10,7 +10,12 @@ import { UserService } from '../service/user.service';
   styleUrls: ['./user-edit.component.scss'],
 })
 export class UserEditComponent implements OnInit, OnDestroy {
-  activeUser: UserModel;
+  activeUser: UserModel = {
+    userId: '',
+    username: '',
+    lastName: '',
+    firstName: '',
+  };
   activeUserSubscription: Subscription;
   constructor(
     private userService: UserService,
@@ -38,5 +43,8 @@ export class UserEditComponent implements OnInit, OnDestroy {
         // show some errors
       }
     );
+  }
+  closeModal(): void {
+    this.activeModal.close();
   }
 }

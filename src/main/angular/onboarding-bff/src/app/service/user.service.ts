@@ -11,7 +11,7 @@ const BASE_URI = './api/users';
 })
 export class UserService {
   private userList: UserModel[] = [];
-  activeUser: BehaviorSubject<UserModel> = new BehaviorSubject(null);
+  activeUser: BehaviorSubject<UserModel> = new BehaviorSubject({userId:'',username:'',lastName:'',firstName:''});
   refreshUserList: Subject<UserModel[]> = new Subject();
 
   constructor(private http: HttpClient) {}

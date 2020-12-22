@@ -13,7 +13,12 @@ import { Subject, Subscription } from 'rxjs';
 export class UserListComponent implements OnInit, OnDestroy {
 
   userList : UserModel [] = [];
-  activeUser: UserModel;
+  activeUser: UserModel = {
+    userId:'',
+    username:'',
+    lastName:'',
+    firstName:''
+  };
   userListSubscription: Subscription;
 
   constructor(private modalController: NgbModal,

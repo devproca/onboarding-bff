@@ -12,7 +12,12 @@ import { UserEditComponent } from '../user-edit/user-edit.component';
   styleUrls: ['./user-detail.component.scss']
 })
 export class UserDetailComponent implements OnInit, OnDestroy {
-  activeUser: UserModel;
+  activeUser: UserModel = {
+    userId:'',
+    username:'',
+    lastName:'',
+    firstName:''
+  };
   activeUserSubscription: Subscription;
   constructor(private modalController:NgbModal,
               private userService:UserService) { }

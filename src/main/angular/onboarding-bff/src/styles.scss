@@ -7,3 +7,7 @@
     color: red;
     font-style: italic;
 }
+
+.form-control.ng-touched.ng-invalid {
+    border: 2px solid red;
+  }

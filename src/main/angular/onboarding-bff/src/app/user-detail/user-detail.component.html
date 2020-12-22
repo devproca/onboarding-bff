@@ -1,29 +1,33 @@
 <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">User Details</h4>
-      <table class="table">
-        <tbody>
-            <tr>
-                <td>User Id</td>
-                <td>1232322</td>
-            </tr>
-          <tr>
-            <td>First name</td>
-            <td>Otto</td>
-          </tr>
-          <tr>
-            <td>Last Name</td>
-            <td>Thornton</td>
-          </tr>
-          <tr>
-            <td>Username</td>
-            <td>Thornton</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="d-flex">
-        <button type="button" class="btn btn-success m-1" (click)="editUser()">Edit</button>
-        <button type="button" class="btn btn-danger m-1" (click)="deleteUser()">Delete</button>
-      </div>
+  <div class="card-body">
+    <h4 class="card-title">User Details</h4>
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>User Id</td>
+          <td>{{ activeUser.userId }}</td>
+        </tr>
+        <tr>
+          <td>First name</td>
+          <td>{{ activeUser.firstName }}</td>
+        </tr>
+        <tr>
+          <td>Last Name</td>
+          <td>{{ activeUser.lastName }}</td>
+        </tr>
+        <tr>
+          <td>Username</td>
+          <td>{{ activeUser.username }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex">
+      <button type="button" class="btn btn-success m-1" (click)="editUser()">
+        Edit
+      </button>
+      <button type="button" class="btn btn-danger m-1" (click)="deleteUser()">
+        Delete
+      </button>
     </div>
   </div>
+</div>
