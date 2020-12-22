@@ -14,7 +14,8 @@ export class UserDeleteComponent implements OnInit {
     userId:'',
     username:'',
     lastName:'',
-    firstName:''
+    firstName:'',
+    phoneNumbers: []
   };
   activeUserSubscription: Subscription;
   constructor(

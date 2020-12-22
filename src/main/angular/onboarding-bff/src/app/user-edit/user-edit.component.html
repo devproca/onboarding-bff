@@ -64,7 +64,7 @@
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary m-1">Save</button>
+    <button type="submit" class="btn btn-primary m-1" [disabled]="!userForm.valid">Save</button>
     <button type="button" class="btn btn-danger m-1" (click)="closeModal()">Close</button>
   </form>
 </div>

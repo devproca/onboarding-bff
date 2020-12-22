@@ -16,7 +16,8 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     userId:'',
     username:'',
     lastName:'',
-    firstName:''
+    firstName:'',
+    phoneNumbers: []
   };
   activeUserSubscription: Subscription;
   constructor(private modalController:NgbModal,

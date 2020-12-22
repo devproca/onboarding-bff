@@ -15,6 +15,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
     username: '',
     lastName: '',
     firstName: '',
+    phoneNumbers: []
   };
   activeUserSubscription: Subscription;
   constructor(

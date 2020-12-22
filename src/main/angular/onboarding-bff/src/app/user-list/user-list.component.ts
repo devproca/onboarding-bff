@@ -17,7 +17,8 @@ export class UserListComponent implements OnInit, OnDestroy {
     userId:'',
     username:'',
     lastName:'',
-    firstName:''
+    firstName:'',
+    phoneNumbers: []
   };
   userListSubscription: Subscription;
 
@@ -25,7 +26,7 @@ export class UserListComponent implements OnInit, OnDestroy {
               private userService: UserService) { }
 
   ngOnInit(): void {
-    /*this.userService.findAll().subscribe(userList => {
+    this.userService.findAll().subscribe(userList => {
       this.userList = userList;
       if(this.userList.length > 0){
         this.userService.setActiveUser(this.userList[0]);
@@ -33,7 +34,7 @@ export class UserListComponent implements OnInit, OnDestroy {
       }
     }, err => {
       //Handel some error here
-    }); */
+    }); 
     this.userListSubscription = this.userService.refreshUserList.subscribe((userList:UserModel[]) => {
       this.userList = userList;
     });
