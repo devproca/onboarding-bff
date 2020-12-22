@@ -2,3 +2,8 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+.error{
+    font-size: 0.8rem;
+    color: red;
+    font-style: italic;
+}

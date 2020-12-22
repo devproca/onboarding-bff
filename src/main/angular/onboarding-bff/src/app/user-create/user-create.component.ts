@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-user-create',
@@ -8,20 +9,21 @@ import { NgForm } from '@angular/forms';
 })
 export class UserCreateComponent implements OnInit {
   @ViewChild('userForm') public userForm: NgForm;
-  user;
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
 
   }
   onSubmit(): void {
+    if(this.userForm.valid){
+      this.userService.create(this.userForm.value).subscribe(user => {
+
+      }, err => {
+        // show what is broken
+      });
+    }
     console.log(this.userForm.value);
   }
 
 }
 
-interface User {
-  username:string;
-  firstName:string;
-  lastName:string;
-}

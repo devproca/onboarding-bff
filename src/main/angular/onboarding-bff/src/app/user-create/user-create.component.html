@@ -1,25 +1,69 @@
 <div class="container p-2">
-<h4 class="text-center">Create User</h4>
-    <form (ngSubmit)="onSubmit()" #userForm="ngForm">
-        <div class="form-group">
-          <label >Username</label>
-          <input type="text" class="form-control" placeholder="Usename" required
-           name="username" ngControl="username" ngModel #userName="ngModel"
-          >
+  <h4 class="text-center">Create User</h4>
+  <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+    <div class="form-group">
+      <label>Username</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Usename"
+        required
+        maxlength="20"
+        name="username"
+        ngControl="username"
+        ngModel
+        #username="ngModel"
+      />
+      <div *ngIf="username.touched && !username.valid" class="error">
+        <div *ngIf="username.errors.required">Username is required</div>
+        <div *ngIf="username.errors.maxlength">
+          Username maximum length is
+          {{ username.errors.maxlength.requiredLength }}
         </div>
-        <div class="form-group">
-          <label>First Name</label>
-          <input type="text" class="form-control" placeholder="First name" required
-           name="firstName" ngControl="firstName" ngModel #firstName="ngModel"
-         >
+      </div>
+    </div>
+    <div class="form-group">
+      <label>First Name</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="First name"
+        required
+        maxlength="50"
+        name="firstName"
+        ngControl="firstName"
+        ngModel
+        #firstName="ngModel"
+      />
+      <div *ngIf="firstName.touched && !firstName.valid" class="error">
+        <div *ngIf="firstName.errors.required">First name is required</div>
+        <div *ngIf="firstName.errors.maxlength">
+          First name maximum length is
+          {{ firstName.errors.maxlength.requiredLength }}
         </div>
-        <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" class="form-control" placeholder="Last name" required
-            name="lastName" ngControl="lastName" ngModel #lasttName="ngModel"
-            >
-          </div>
-          <button type="submit" class="btn btn-primary">Create</button>
-      </form>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Last name"
+        required
+        maxlength="50"
+        name="lastName"
+        ngControl="lastName"
+        ngModel
+        #lastName="ngModel"
+      />
+      <div *ngIf="lastName.touched && !lastName.valid" class="error">
+        <div *ngIf="lastName.errors.required">Last name is required</div>
+        <div *ngIf="lastName.errors.maxlength">
+          Last name maximum length is
+          {{ lastName.errors.maxlength.requiredLength }}
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
 </div>
-
