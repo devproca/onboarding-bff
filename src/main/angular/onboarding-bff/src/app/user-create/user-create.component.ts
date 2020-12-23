@@ -10,6 +10,7 @@ import { UserService } from '../service/user.service';
 })
 export class UserCreateComponent implements OnInit {
   @ViewChild('userForm') public userForm: NgForm;
+  phoneNumberBool:boolean;
   constructor(
     private userService: UserService,
     private modeController: NgbActiveModal
@@ -17,7 +18,7 @@ export class UserCreateComponent implements OnInit {
 
   ngOnInit(): void {}
   onSubmit(): void {
-    if (this.userForm.valid) {
+   /* if (this.userForm.valid) {
       this.userService.create(this.userForm.value).subscribe(
         (user) => {
           this.modeController.close();
@@ -26,10 +27,15 @@ export class UserCreateComponent implements OnInit {
           // show what is broken
         }
       );
-    }
+    } */
     console.log(this.userForm.value);
   }
   closeModal(): void {
     this.modeController.close();
   }
+  public onPhoneNumberCheckChanged(value:boolean){
+    console.log(value);
+    this.phoneNumberBool = value;
+}
+  
 }

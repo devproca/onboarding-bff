@@ -12,6 +12,8 @@ import { UserCreateComponent } from './user-create/user-create.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { PhonenumberCreateComponent } from './phonenumber-create/phonenumber-create.component';
+import { UiSwitchModule } from 'ngx-toggle-switch';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     UserCreateComponent,
     MainScreenComponent,
     UserEditComponent,
+    PhonenumberCreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +32,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     FormsModule,
     AppRoutingModule,
     NgbModule,
+    UiSwitchModule
   ],
   providers: [],
   bootstrap: [AppComponent]

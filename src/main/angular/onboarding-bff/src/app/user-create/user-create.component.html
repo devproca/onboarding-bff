@@ -64,7 +64,32 @@
         </div>
       </div>
     </div>
-    <button type="submit" [disabled]="!userForm.valid" class="btn btn-primary m-1">Create</button>
+    <div class="form-group m-1">
+      <label>Phone Number  </label>
+      <ui-switch
+        class="m-1"
+        [(ngModel)]="phoneNumberBool"
+        [ngModelOptions]="{ standalone: true }"
+        size="small"
+      ></ui-switch>
+
+    </div>
+    <app-phonenumber-create
+      *ngIf="phoneNumberBool"
+      ngControl="phoneNumber"
+      name="phoneNumber"
+      ngControl="phoneNumber"
+      ngModel
+      #phoneNumber="ngModel"
+    ></app-phonenumber-create>
+
+    <button
+      type="submit"
+      [disabled]="!userForm.valid"
+      class="btn btn-primary m-1"
+    >
+      Create
+    </button>
     <button type="submit" class="btn btn-danger m-1">Close</button>
   </form>
 </div>

@@ -44,7 +44,7 @@ export class UserService {
   delete(deletedUser: UserModel) {
     return this.http.delete<void>(`${BASE_URI}/${deletedUser.userId}`).pipe(
       map(() => {
-        this.userList.filter((user) => user.userId !== deletedUser.userId);
+        this.userList = this.userList.filter((user) => user.userId !== deletedUser.userId);
         this.refreshUserList.next(this.userList);
       })
     );
