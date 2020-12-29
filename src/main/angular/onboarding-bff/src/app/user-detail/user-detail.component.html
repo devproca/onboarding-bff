@@ -19,9 +19,20 @@
           <td>Username</td>
           <td>{{ activeUser.username }}</td>
         </tr>
+        <tr *ngFor = "let number of activeUser.phoneNumbers">
+          <td>Phone number</td>
+          <td>{{ number }}</td>
+          <td><button type="button" class="btn btn-fanger m-1" (click)="deletePhonenumber(number.phoneNumberId)">
+            delete
+          </button> </td>
+        </tr>
       </tbody>
     </table>
     <div class="d-flex">
+     
+      <button type="button" class="btn btn-primary m-1" (click)="addPhonenumber()">
+        Add Phone Number
+      </button> 
       <button type="button" class="btn btn-success m-1" (click)="editUser()">
         Edit
       </button>

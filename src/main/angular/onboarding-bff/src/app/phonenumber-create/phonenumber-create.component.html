@@ -4,25 +4,18 @@
     type="text"
     class="form-control"
     placeholder="Phone Number "
-    required
-    maxlength="10"
-    minlength="10"
-    name="Value"
-    ngControl="Value"
-    pattern="^((\\+91-?)|0)?[0-9]{10}$"
-    #Value="ngModel"
-    [(ngModel)]="value"
+    [(ngModel)]="val.phonenumber1"
+    (ngModelChange)="notifyChanges(val)"
   />
-  <div *ngIf="Value.touched && !Value.valid" class="error">
-    <div *ngIf="Value.errors.required">phone number  is required</div>
-    <div *ngIf="Value.errors.maxlength">
-      Phone number  maximum length is
-      {{ Value.errors.maxlength.requiredLength }}
-    </div>
-    <div *ngIf="Value.errors.minlength">
-      Phone number  minimum length is
-      {{ Value.errors.minlength.requiredLength }}
-    </div>
-    <div *ngIf="Value.errors.pattern">Invaild Phone number</div>
-  </div>
+</div>
+
+<div class="form-group">
+  <label>Phone Number</label>
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Phone Number "
+    [(ngModel)]="val.phonenumber2"
+    (ngModelChange)="notifyChanges(val)"
+  />
 </div>

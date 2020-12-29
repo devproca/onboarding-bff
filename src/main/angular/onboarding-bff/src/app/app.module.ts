@@ -14,6 +14,7 @@ import { MainScreenComponent } from './main-screen/main-screen.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { PhonenumberCreateComponent } from './phonenumber-create/phonenumber-create.component';
 import { UiSwitchModule } from 'ngx-toggle-switch';
+import { AddPhoneNumberToUserComponent } from './add-phone-number-to-user/add-phone-number-to-user.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { UiSwitchModule } from 'ngx-toggle-switch';
     MainScreenComponent,
     UserEditComponent,
     PhonenumberCreateComponent,
+    AddPhoneNumberToUserComponent,
   ],
   imports: [
     BrowserModule,

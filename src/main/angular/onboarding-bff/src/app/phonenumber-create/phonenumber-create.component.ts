@@ -1,5 +1,10 @@
 import { Component, forwardRef, HostBinding, Input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-phonenumber-create',
@@ -19,18 +24,11 @@ export class PhonenumberCreateComponent implements ControlValueAccessor {
   onChange: any = () => {};
   onTouch: any = () => {};
 
-  val = ''; // this is the updated value that the class accesses
-
-  set value(val) {
-    // this value is updated by programmatic changes if( val !== undefined && this.val !== val){
-    this.val = val;
-    this.onChange(val);
-    this.onTouch(val);
-  }
+  val = { phonenumber1: '', phonenumber2: '' }; // this is the updated value that the class accesses
 
   // this method sets the value programmatically
   writeValue(value: any) {
-    this.value = value;
+    this.val = { ...value };
   }
   // upon UI element value changes, this method gets triggered
   registerOnChange(fn: any) {
@@ -40,5 +38,11 @@ export class PhonenumberCreateComponent implements ControlValueAccessor {
   // upon touching the element, this method gets triggered
   registerOnTouched(fn: any) {
     this.onTouch = fn;
+  }
+
+  public notifyChanges(value): void {
+    this.val = value;
+    this.onChange(this.val);
+    this.onTouch(this.val);
   }
 }

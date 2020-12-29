@@ -1,0 +1,41 @@
+<div class="container p-2">
+    <h4 class="text-center">Add Phone Number</h4>
+  <form (ngSubmit)="onSubmit()" #phoneForm="ngForm">
+    <div class="form-group">
+      <label>Phone Number</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Phone Number "
+        required
+        maxlength="10"
+        minlength="10"
+        name="Value"
+        ngControl="Value"
+        pattern="^((\\+91-?)|0)?[0-9]{10}$"
+        #phone="ngModel"
+        [(ngModel)]="phoneNumber.phoneNumber"
+      />
+      <div *ngIf="phone.touched && !phone.valid" class="error">
+        <div *ngIf="phone.errors.required">phone number  is required</div>
+        <div *ngIf="phone.errors.maxlength">
+          Phone number  maximum length is
+          {{ phone.errors.maxlength.requiredLength }}
+        </div>
+        <div *ngIf="phone.errors.minlength">
+          Phone number  minimum length is
+          {{ phone.errors.minlength.requiredLength }}
+        </div>
+        <div *ngIf="phone.errors.pattern">Invaild Phone number</div>
+      </div>
+    </div>
+    <button
+    type="submit"
+    [disabled]="!phoneForm.valid"
+    class="btn btn-primary m-1"
+  >
+    Create
+  </button>
+  <button type="submit" class="btn btn-danger m-1" (click)="closeModal()">Close</button>
+  </form>
+</div>

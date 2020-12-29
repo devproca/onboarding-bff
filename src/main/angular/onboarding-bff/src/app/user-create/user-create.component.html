@@ -65,14 +65,13 @@
       </div>
     </div>
     <div class="form-group m-1">
-      <label>Phone Number  </label>
+      <label>Phone Number </label>
       <ui-switch
         class="m-1"
         [(ngModel)]="phoneNumberBool"
         [ngModelOptions]="{ standalone: true }"
         size="small"
       ></ui-switch>
-
     </div>
     <app-phonenumber-create
       *ngIf="phoneNumberBool"
@@ -82,7 +81,6 @@
       ngModel
       #phoneNumber="ngModel"
     ></app-phonenumber-create>
-
     <button
       type="submit"
       [disabled]="!userForm.valid"
