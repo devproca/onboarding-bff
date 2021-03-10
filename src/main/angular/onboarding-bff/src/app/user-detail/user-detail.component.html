@@ -1,0 +1,22 @@
+
+<form [formGroup]="formGroup">
+  <div class="form-group">
+    <label>First name</label>
+    <input class="form-control" formControlName="firstName">
+  </div>
+  <div class="form-group">
+    <label>Last name</label>
+    <input class="form-control" formControlName="lastName">
+  </div>
+  <div class="form-group">
+    <label>User name</label>
+    <input class="form-control" formControlName="username">
+  </div>
+</form>
+
+
+<a class="btn btn-outline-secondary" (click)="cancel()">Cancel</a>
+<a class="btn btn-primary ml-2" (click)="save()">Save</a>
+
+
+{{formGroup.value | json}}

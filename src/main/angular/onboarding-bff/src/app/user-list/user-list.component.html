@@ -1,0 +1,23 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Username</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of users">
+    <td>{{user.firstName}}</td>
+    <td>{{user.lastName}}</td>
+    <td>{{user.username}}</td>
+    <td><a (click)="edit(user)">Edit</a></td>
+  </tr>
+  </tbody>
+</table>
+
+
+<a class="btn btn-primary" (click)="create()">Add user</a>
+
+<div *ngIf="!loadingSubscription.closed">LOADING!!!</div>
