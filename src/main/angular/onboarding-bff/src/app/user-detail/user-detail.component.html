@@ -1,22 +1,81 @@
 
-<form [formGroup]="formGroup">
-  <div class="form-group">
-    <label>First name</label>
-    <input class="form-control" formControlName="firstName">
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-sm-offset-2 mt-sm-2 mt-md-4 mt-lg-4">
+      <form [formGroup]="userDetailForm" (ngSubmit)="onSubmit()">
+
+        <input id="userId"
+               type="hidden"
+               formControlName="userId">
+
+        <div class="form-group">
+          <label>First Name</label>
+          <input id="firstname"
+                 placeholder="First Name"
+                 class="form-control"
+                 type="text"
+                 formControlName="firstName">
+          <small *ngIf="!userDetailForm.get('firstName').valid &&
+                         userDetailForm.get('firstName').hasError('forbiddenFirstName')"
+                 class="text-danger">First Name is Forbidden!</small>
+          <small *ngIf="!userDetailForm.get('firstName').valid &&
+                         userDetailForm.get('firstName').hasError('required') &&
+                         userDetailForm.get('firstName').touched"
+            class="text-danger">First Name is mandatory!</small>
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input id="lastname"
+                 placeholder="Last Name"
+                 class="form-control"
+                 type="text"
+                 formControlName="lastName">
+          <small *ngIf="!userDetailForm.get('lastName').valid &&
+                         userDetailForm.get('lastName').touched"
+                class="text-danger">Last Name is mandatory!</small>
+        </div>
+        <div class="form-group">
+          <label>User Name</label>
+          <input id="username"
+                 placeholder="User Name"
+                 class="form-control"
+                 type="text"
+                 formControlName="userName">
+          <small *ngIf="!userDetailForm.get('userName').valid &&
+                         userDetailForm.get('userName').hasError('forbiddenUserName')"
+                 class="text-danger">User Name is Forbidden!</small>
+          <small *ngIf="!userDetailForm.get('userName').valid &&
+                         userDetailForm.get('userName').hasError('required') &&
+                         userDetailForm.get('userName').touched"
+                class="text-danger">User Name is mandatory!</small>
+        </div>
+
+        <hr>
+
+        <div formArrayName="aliases">
+          <h4>Aliases</h4>
+           <button class="btn btn-info mb-2"
+                   type="button"
+                   (click)="addAlias()"
+           >Add Alias</button>
+          <div *ngFor="let aliasControl of getAliases().controls; let idx = index"
+            class="form-group">
+            <input [formControlName]="idx" class="form-control col-4" type="text" placeholder="Alias">
+          </div>
+        </div>
+
+
+        <div class="text-center">
+          <a class="btn btn-danger" (click)="cancel()">Cancel</a>
+          <a class="btn btn-primary ml-2" type="submit">Save</a>
+        </div>
+      </form>
+    </div>
   </div>
-  <div class="form-group">
-    <label>Last name</label>
-    <input class="form-control" formControlName="lastName">
-  </div>
-  <div class="form-group">
-    <label>User name</label>
-    <input class="form-control" formControlName="username">
-  </div>
-</form>
+</div>
 
-
-<a class="btn btn-outline-secondary" (click)="cancel()">Cancel</a>
-<a class="btn btn-primary ml-2" (click)="save()">Save</a>
-
-
-{{formGroup.value | json}}
+<br>
+{{userDetailForm.value | json}}
+<br>
+Form Status:
+{{userDetailForm.status}}

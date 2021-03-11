@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserModel} from "../model/user.model";
 import {UserService} from "../service/user.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-user-detail',
@@ -11,7 +12,9 @@ import {UserService} from "../service/user.service";
 })
 export class UserDetailComponent implements OnInit {
 
-  formGroup = this.createForm();
+  userDetailForm:FormGroup = null;
+  forbiddenUserNames: string[] = ["illegal", "invalid", "fake"];
+  forbiddenFirstNames: string[] = ["enigo", "fezik"];
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -20,6 +23,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userDetailForm = this.createForm();
     this.registerRouteChanges();
   }
 
@@ -35,21 +39,24 @@ export class UserDetailComponent implements OnInit {
 
   private reloadUser(userId: string): void {
     this.userService.get(userId).subscribe(user => {
-      this.formGroup.patchValue(user);
+      this.userDetailForm.patchValue(user);
     });
   }
 
   private createForm(): FormGroup {
     return this.formBuilder.group({
-      userId: null,
-      firstName: null,
-      lastName: null,
-      username: null
+      userId: [''],
+      firstName: ['', [Validators.required], this.isFirstNameForbiddenAsync.bind(this)],
+      lastName: ['', [Validators.required]],
+      userName: ['', [Validators.required, this.isNameForbidden.bind(this)] ],
+      aliases: this.formBuilder.array([
+        this.formBuilder.control(null)
+      ])
     });
   }
 
-  save(): void {
-    const valueToSave = this.formGroup.value as UserModel;
+  onSubmit(): void {
+    const valueToSave = this.userDetailForm.value as UserModel;
     if (valueToSave.userId) {
       this.userService.update(valueToSave).subscribe(_ => this.router.navigateByUrl("/users"));
     } else {
@@ -60,4 +67,33 @@ export class UserDetailComponent implements OnInit {
   cancel(): void {
     this.router.navigateByUrl("/users");
   }
+
+  addAlias(): void {
+    const control = new FormControl(null, [Validators.required]);
+    this.getAliases().push(control);
+  }
+
+  getAliases(): FormArray {
+    return this.userDetailForm.get('aliases') as FormArray;
+  }
+
+  isFirstNameForbiddenAsync(control: FormControl): Promise<any> | Observable<any> {
+    return new Promise<any>(
+      (resolve, reject) => {
+        setTimeout(() => {
+          if (this.forbiddenFirstNames.indexOf(control.value) !== -1) {
+            resolve( { 'forbiddenFirstName': true } );
+          } else {
+            resolve(null);
+          }
+        }, 1100);
+      }
+    );
+  }
+
+  isNameForbidden(control: FormControl): {[key:string]: boolean} | null {
+       return (this.forbiddenUserNames.indexOf(control.value) !== -1) ?
+            { 'forbiddenUserName': true } : null;
+  }
+
 }
