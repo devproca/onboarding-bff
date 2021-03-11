@@ -1,5 +1,5 @@
 
-<form [formGroup]="formGroup">
+<form [formGroup]="userFormGroup">
   <div class="form-group">
     <label>First name</label>
     <input class="form-control" formControlName="firstName">
@@ -12,11 +12,29 @@
     <label>User name</label>
     <input class="form-control" formControlName="username">
   </div>
+
+  <div formArrayName="phoneNumbers" *ngFor="let phone of userFormGroup.get('phoneNumbers')['controls']; let i = index;">
+    <div [formGroupName]="i"  class="form-group">
+      <label>Phone number</label>
+      <input formControlName="phoneNumber" class="form-control">
+    </div>
+  </div>
+  <button class="btn btn-primary form-group" (click)="addPhoneNumber()">Add Phone Number</button>
 </form>
+
+
+
+
+
+
+
+
 
 
 <a class="btn btn-outline-secondary" (click)="cancel()">Cancel</a>
 <a class="btn btn-primary ml-2" (click)="save()">Save</a>
 
 
-{{formGroup.value | json}}
+{{userFormGroup.value | json}}
+{{userFormGroup.get("FormArray:phoneNumbers[]")}}
+

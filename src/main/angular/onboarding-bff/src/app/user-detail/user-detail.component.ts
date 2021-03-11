@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserModel} from "../model/user.model";
 import {UserService} from "../service/user.service";
@@ -11,7 +11,9 @@ import {UserService} from "../service/user.service";
 })
 export class UserDetailComponent implements OnInit {
 
-  formGroup = this.createForm();
+  phones: FormArray;
+  userFormGroup = this.createForm();
+
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -35,7 +37,7 @@ export class UserDetailComponent implements OnInit {
 
   private reloadUser(userId: string): void {
     this.userService.get(userId).subscribe(user => {
-      this.formGroup.patchValue(user);
+      this.userFormGroup.patchValue(user);
     });
   }
 
@@ -44,12 +46,31 @@ export class UserDetailComponent implements OnInit {
       userId: null,
       firstName: null,
       lastName: null,
-      username: null
+      username: null,
+      phoneNumbers: this.formBuilder.array([
+        this.addPhoneNumberFormGroup()
+      ])
     });
   }
 
+
+  addPhoneNumber(): void{
+   this.phones = this.userFormGroup.get('phoneNumbers') as FormArray;
+   this.phones.push(this.addPhoneNumberFormGroup())
+  }
+
+  addPhoneNumberFormGroup(): FormGroup{
+  return this.formBuilder.group({
+      phoneNumber: '',
+    }
+  );
+  }
+
+
   save(): void {
-    const valueToSave = this.formGroup.value as UserModel;
+    let valueToSave = this.userFormGroup.value as UserModel;
+
+
     if (valueToSave.userId) {
       this.userService.update(valueToSave).subscribe(_ => this.router.navigateByUrl("/users"));
     } else {

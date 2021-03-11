@@ -4,6 +4,7 @@
     <th>First name</th>
     <th>Last name</th>
     <th>Username</th>
+    <th>Phone Numbers</th>
     <th></th>
   </tr>
   </thead>
@@ -12,7 +13,11 @@
     <td>{{user.firstName}}</td>
     <td>{{user.lastName}}</td>
     <td>{{user.username}}</td>
-    <td><a (click)="edit(user)">Edit</a></td>
+    <td>
+      <div *ngFor="let phonenumber of user.phoneNumbers">{{phonenumber.phoneNumber}}</div>
+    </td>
+    <td><a (click)=" edit(user)
+      ">Edit</a></td>
   </tr>
   </tbody>
 </table>

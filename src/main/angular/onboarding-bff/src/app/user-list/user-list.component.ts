@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserModel} from "../model/user.model";
+import {PhoneNumberModel} from "../model/phoneNumber.model";
 import {UserService} from "../service/user.service";
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
@@ -12,6 +13,7 @@ import {Router} from "@angular/router";
 export class UserListComponent implements OnInit {
 
   users: UserModel[] = [];
+  phoneNumbers: PhoneNumberModel[] = []
   loadingSubscription = Subscription.EMPTY;
 
   constructor(private userService: UserService,
