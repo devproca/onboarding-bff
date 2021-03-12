@@ -59,9 +59,13 @@ export class UserDetailComponent implements OnInit {
     const toSave = this.userDetailForm.value as UserModel;
 
     if (toSave.userId) {
-      this.userService.update(toSave).subscribe(_ => this.router.navigateByUrl("/users"));
+      this.userService.update(toSave)
+        .subscribe(_ => this.router.navigateByUrl("/users")
+        ,(error: string) => window.alert(error)  );
     } else {
-      this.userService.create(toSave).subscribe(_ => this.router.navigateByUrl("/users"));
+      this.userService.create(toSave)
+        .subscribe(_ => this.router.navigateByUrl("/users")
+        , (error: string) => window.alert(error));
     }
   }
 
