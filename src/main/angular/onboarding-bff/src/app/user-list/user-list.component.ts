@@ -33,8 +33,11 @@ export class UserListComponent implements OnInit {
   }
 
   delete(user: UserModel): void {
-    this.userService.delete(user.userId).subscribe(
-      _ => this.refreshData());
+    if (window.confirm(`Please confirm you wish to delete USER: ${user.username}`)) {
+      this.userService.delete(user.userId).subscribe(
+        _ => this.refreshData());
+    }
+
   }
 
 
