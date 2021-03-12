@@ -1,4 +1,3 @@
-
 <form [formGroup]="userFormGroup">
   <div class="form-group">
     <label>First name</label>
@@ -14,21 +13,13 @@
   </div>
 
   <div formArrayName="phoneNumbers" *ngFor="let phone of userFormGroup.get('phoneNumbers')['controls']; let i = index;">
-    <div [formGroupName]="i"  class="form-group">
+    <div [formGroupName]="i" class="form-group">
       <label>Phone number</label>
       <input formControlName="phoneNumber" class="form-control">
     </div>
   </div>
   <button class="btn btn-primary form-group" (click)="addPhoneNumber()">Add Phone Number</button>
 </form>
-
-
-
-
-
-
-
-
 
 
 <a class="btn btn-outline-secondary" (click)="cancel()">Cancel</a>

@@ -54,16 +54,16 @@ export class UserDetailComponent implements OnInit {
   }
 
 
-  addPhoneNumber(): void{
-   this.phones = this.userFormGroup.get('phoneNumbers') as FormArray;
-   this.phones.push(this.addPhoneNumberFormGroup())
+  addPhoneNumber(): void {
+    this.phones = this.userFormGroup.get('phoneNumbers') as FormArray;
+    this.phones.push(this.addPhoneNumberFormGroup())
   }
 
-  addPhoneNumberFormGroup(): FormGroup{
-  return this.formBuilder.group({
-      phoneNumber: '',
-    }
-  );
+  addPhoneNumberFormGroup(): FormGroup {
+    return this.formBuilder.group({
+        phoneNumber: '',
+      }
+    );
   }
 
 
