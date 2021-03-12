@@ -1,31 +1,44 @@
-<form [formGroup]="userFormGroup">
-  <div class="form-group">
-    <label>First name</label>
-    <input class="form-control" formControlName="firstName">
-  </div>
-  <div class="form-group">
-    <label>Last name</label>
-    <input class="form-control" formControlName="lastName">
-  </div>
-  <div class="form-group">
-    <label>User name</label>
-    <input class="form-control" formControlName="username">
-  </div>
-
-  <div formArrayName="phoneNumbers" *ngFor="let phone of userFormGroup.get('phoneNumbers')['controls']; let i = index;">
-    <div [formGroupName]="i" class="form-group">
-      <label>Phone number</label>
-      <input formControlName="phoneNumber" class="form-control">
+<div class="container">
+  <h1 class="font-bold text-xl">Add User</h1>
+  <form [formGroup]="userFormGroup">
+    <div class="formGroupContainer">
+      <label>First name</label>
+      <input class="input" [ngClass]="{'error-input' : userFormGroup.get('firstName').errors && (
+     userFormGroup.get('firstName').touched || userFormGroup.get('firstName').dirty)}" formControlName="firstName">
+      <span class="error-label" *ngIf=" (userFormGroup.get('firstName').errors && (
+     userFormGroup.get('firstName').touched || userFormGroup.get('firstName').dirty))">First name required</span>
     </div>
+    <div class="formGroupContainer">
+      <label>Last name</label>
+      <input class="input" [ngClass]="{'error-input' : userFormGroup.get('lastName').errors && (
+     userFormGroup.get('lastName').touched || userFormGroup.get('lastName').dirty)}" formControlName="lastName">
+      <span class="error-label" *ngIf=" (userFormGroup.get('lastName').errors && (
+     userFormGroup.get('lastName').touched || userFormGroup.get('lastName').dirty))">Last name required</span>
+    </div>
+    <div class="formGroupContainer">
+      <label>User name</label>
+      <input class="input" [ngClass]="{'error-input' : userFormGroup.get('username').errors && (
+     userFormGroup.get('username').touched || userFormGroup.get('username').dirty)}" formControlName="username">
+      <span class="error-label" *ngIf=" (userFormGroup.get('username').errors && (
+     userFormGroup.get('username').touched || userFormGroup.get('username').dirty))">Minimum length 8</span>
+    </div>
+    <div formArrayName="phoneNumbers"
+         *ngFor="let phone of userFormGroup.get('phoneNumbers')['controls']; let i = index;">
+      <div [formGroupName]="i" class="formGroupContainer">
+        <label>Phone number</label>
+        <input formControlName="phoneNumber" [ngClass]="{'error-input' : phone.get('phoneNumber').errors && (
+     phone.get('phoneNumber').touched)}" class="input">
+        <span class="error-label" *ngIf=" (phone.get('phoneNumber').errors && (
+     phone.get('phoneNumber').touched))">Invalid phone number</span>
+      </div>
+    </div>
+    <button class="btnclass-accept mb-10 ml-5" (click)="addPhoneNumber()">Add Phone Number</button>
+  </form>
+
+  <div class="flex">
+    <a class="btnclass-cancel mr-5" (click)="cancel()">Cancel</a>
+    <a class="btnclass-accept ml-5" (click)="save()">Save</a>
   </div>
-  <button class="btn btn-primary form-group" (click)="addPhoneNumber()">Add Phone Number</button>
-</form>
 
-
-<a class="btn btn-outline-secondary" (click)="cancel()">Cancel</a>
-<a class="btn btn-primary ml-2" (click)="save()">Save</a>
-
-
-{{userFormGroup.value | json}}
-{{userFormGroup.get("FormArray:phoneNumbers[]")}}
+</div>
 

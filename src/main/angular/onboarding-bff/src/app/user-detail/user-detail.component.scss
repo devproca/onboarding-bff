@@ -1,0 +1,22 @@
+.input{
+  @apply border-b border-gray-300 p-1 w-min;
+}
+
+.container{
+  @apply border border-gray-200 h-auto w-auto p-20 flex flex-col justify-center
+  items-center rounded-lg shadow-lg;
+
+}
+
+.formGroupContainer{
+  @apply flex flex-col my-4;
+}
+
+.error-input{
+  @apply border border-red-600;
+}
+
+.error-label{
+  @apply text-red-600;
+}
+

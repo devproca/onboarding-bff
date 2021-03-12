@@ -1,28 +1,43 @@
-<table class="table">
-  <thead>
-  <tr>
-    <th>First name</th>
-    <th>Last name</th>
-    <th>Username</th>
-    <th>Phone Numbers</th>
-    <th></th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let user of users">
-    <td>{{user.firstName}}</td>
-    <td>{{user.lastName}}</td>
-    <td>{{user.username}}</td>
-    <td>
-      <div *ngFor="let phonenumber of user.phoneNumbers">{{phonenumber.phoneNumber}}</div>
-    </td>
-    <td><a (click)=" edit(user)
-      ">Edit</a></td>
-  </tr>
-  </tbody>
-</table>
+<div class="h-auto w-auto shadow-lg border border-gray-200 relative rounded-lg">
+  <table>
+    <thead>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Username</th>
+      <th>Phone Numbers</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{user.firstName}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.username}}</td>
+      <td>
+        <div *ngFor="let phonenumber of user.phoneNumbers">{{phonenumber.phoneNumber}}</div>
+      </td>
+      <td><a class="btnclass-accept" (click)="edit(user)">Edit</a></td>
+      <td>
+        <a class="btnclass-cancel" (click)="delete(user.userId)">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+    <div class="flex justify-center mt-2">
+      <a class="btnclass-accept" (click)="create()">Add user</a>
+    </div>
+  </table>
+
+  <div *ngIf="showDeletePopUp" class="popUp absolute left-40 top-0 ">
+    <div>
+      Are you sure you want delete this user?
+    </div>
+    <div class="flex mt-10">
+      <button class="btnclass-cancel mr-2" (click)="confirmDelete()">Delete</button>
+      <button class="btnclass-accept ml-2" (click)="closePopUp()">Cancel</button>
+    </div>
+  </div>
 
 
-<a class="btn btn-primary" (click)="create()">Add user</a>
-
-<div *ngIf="!loadingSubscription.closed">LOADING!!!</div>
+  <div *ngIf="!loadingSubscription.closed">LOADING!!!</div>
+</div>

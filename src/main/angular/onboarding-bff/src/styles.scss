@@ -1,2 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~bootstrap/dist/css/bootstrap.min.css';
+//@import '~bootstrap/dist/css/bootstrap.min.css';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+.btnclass-accept{
+  @apply bg-blue-600 rounded p-2 opacity-75 text-white cursor-pointer hover:bg-blue-400;
+}
+
+.btnclass-cancel{
+  @apply bg-blue-600 rounded p-2 opacity-75 text-white cursor-pointer hover:bg-red-400;
+}
+
+
