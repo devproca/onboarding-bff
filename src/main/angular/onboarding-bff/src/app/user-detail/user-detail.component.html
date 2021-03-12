@@ -40,13 +40,13 @@
                  placeholder="User Name"
                  class="form-control"
                  type="text"
-                 formControlName="userName">
-          <small *ngIf="!userDetailForm.get('userName').valid &&
-                         userDetailForm.get('userName').hasError('forbiddenUserName')"
+                 formControlName="username">
+          <small *ngIf="!userDetailForm.get('username').valid &&
+                         userDetailForm.get('username').hasError('forbiddenUserName')"
                  class="text-danger">User Name is Forbidden!</small>
-          <small *ngIf="!userDetailForm.get('userName').valid &&
-                         userDetailForm.get('userName').hasError('required') &&
-                         userDetailForm.get('userName').touched"
+          <small *ngIf="!userDetailForm.get('username').valid &&
+                         userDetailForm.get('username').hasError('required') &&
+                         userDetailForm.get('username').touched"
                 class="text-danger">User Name is mandatory!</small>
         </div>
 
@@ -64,11 +64,14 @@
           </div>
         </div>
 
-
         <div class="text-center">
-          <a class="btn btn-danger" (click)="cancel()">Cancel</a>
-          <a class="btn btn-primary ml-2" type="submit">Save</a>
+          <button class="btn btn-danger"
+                  (click)="cancel()">Cancel</button>
+          <button class="btn btn-primary ml-2"
+                  type="submit"
+                  [disabled]="!userDetailForm.valid" >Save</button>
         </div>
+
       </form>
     </div>
   </div>

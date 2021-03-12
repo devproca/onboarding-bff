@@ -26,6 +26,11 @@ export class UserListComponent implements OnInit {
     this.router.navigateByUrl(`/users/${user.userId}`);
   }
 
+  delete(user: UserModel): void {
+    this.router.navigateByUrl(`/users/${user.userId}`);
+  }
+
+
   create(): void {
     this.router.navigateByUrl("/users/create");
   }

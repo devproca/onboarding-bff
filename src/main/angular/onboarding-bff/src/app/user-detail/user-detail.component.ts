@@ -48,7 +48,7 @@ export class UserDetailComponent implements OnInit {
       userId: [''],
       firstName: ['', [Validators.required], this.isFirstNameForbiddenAsync.bind(this)],
       lastName: ['', [Validators.required]],
-      userName: ['', [Validators.required, this.isNameForbidden.bind(this)] ],
+      username: ['', [Validators.required, this.isNameForbidden.bind(this)] ],
       aliases: this.formBuilder.array([
         this.formBuilder.control(null)
       ])
@@ -56,11 +56,12 @@ export class UserDetailComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const valueToSave = this.userDetailForm.value as UserModel;
-    if (valueToSave.userId) {
-      this.userService.update(valueToSave).subscribe(_ => this.router.navigateByUrl("/users"));
+    const toSave = this.userDetailForm.value as UserModel;
+
+    if (toSave.userId) {
+      this.userService.update(toSave).subscribe(_ => this.router.navigateByUrl("/users"));
     } else {
-      this.userService.create(valueToSave).subscribe(_ => this.router.navigateByUrl("/users"));
+      this.userService.create(toSave).subscribe(_ => this.router.navigateByUrl("/users"));
     }
   }
 

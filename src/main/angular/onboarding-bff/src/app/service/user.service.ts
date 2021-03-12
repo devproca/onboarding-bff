@@ -2,31 +2,33 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {UserModel} from "../model/user.model";
 import {HttpClient} from "@angular/common/http";
+import {environment} from "../../environments/environment.prod";
 
-const BASE_URI = "./api/users"
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
+  baseUri = environment.baseUri;
+
   constructor(private http: HttpClient) {
 
   }
 
   findAllUsers(): Observable<UserModel[]> {
-    return this.http.get<UserModel[]>(BASE_URI);
+    return this.http.get<UserModel[]>(this.baseUri);
   }
 
   get(userId: string): Observable<UserModel> {
-    return this.http.get<UserModel>(`${BASE_URI}/${userId}`);
+    return this.http.get<UserModel>(`${this.baseUri}/${userId}`);
   }
 
   create(user: UserModel): Observable<UserModel> {
-    return this.http.post<UserModel>(BASE_URI, user);
+    return this.http.post<UserModel>(this.baseUri, user);
   }
 
   update(user: UserModel): Observable<UserModel> {
-    return this.http.put<UserModel>(`${BASE_URI}/${user.userId}`, user);
+    return this.http.put<UserModel>(`${this.baseUri}/${user.userId}`, user);
   }
 }
