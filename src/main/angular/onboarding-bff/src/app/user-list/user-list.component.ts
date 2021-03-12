@@ -19,7 +19,13 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadingSubscription = this.userService.findAllUsers().subscribe(users => this.users = users);
+    this.refreshData();
+  }
+
+  private refreshData() {
+    this.loadingSubscription =
+      this.userService.findAllUsers().subscribe(
+        users => this.users = users);
   }
 
   edit(user: UserModel): void {
@@ -27,7 +33,8 @@ export class UserListComponent implements OnInit {
   }
 
   delete(user: UserModel): void {
-    this.router.navigateByUrl(`/users/${user.userId}`);
+    this.userService.delete(user.userId).subscribe(
+      _ => this.refreshData());
   }
 
 

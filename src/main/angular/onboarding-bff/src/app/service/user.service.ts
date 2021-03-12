@@ -24,6 +24,10 @@ export class UserService {
     return this.http.get<UserModel>(`${this.baseUri}/${userId}`);
   }
 
+  delete(userId: string): Observable<any> {
+    return this.http.delete<any>(`${this.baseUri}/${userId}`);
+  }
+
   create(user: UserModel): Observable<UserModel> {
     return this.http.post<UserModel>(this.baseUri, user);
   }
