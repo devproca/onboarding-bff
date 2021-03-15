@@ -8,24 +8,23 @@ import {LocalizeService} from './service/localize.service';
 })
 export class AppComponent implements OnInit {
 
-  languages: string[] = ['English', 'français'];
+  LANGUAGES: string[] = ['English', 'français'];
   currentLanguage: string;
 
   constructor(private localizeService: LocalizeService){ }
 
   ngOnInit(): void {
-    this.currentLanguage = this.languages[0];
+    this.currentLanguage = this.LANGUAGES[0];
     this.localizeService.setInitialLanguage();
   }
 
   toggleLang(): void {
-    if (this.currentLanguage.toLowerCase() === this.languages[0].toLowerCase()) {
-      this.currentLanguage = this.languages[1];
-      this.localizeService.setLanguage('fr');
+    if (this.currentLanguage.toLowerCase() === this.LANGUAGES[0].toLowerCase()) {
+      this.currentLanguage = this.LANGUAGES[1];
     } else {
-      this.localizeService.setLanguage('en');
-      this.currentLanguage = this.languages[0];
+      this.currentLanguage = this.LANGUAGES[0];
     }
+    this.localizeService.setLanguage(this.currentLanguage.toLowerCase().substr(0,2));
   }
 
 }

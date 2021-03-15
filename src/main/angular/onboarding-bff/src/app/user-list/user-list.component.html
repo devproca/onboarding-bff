@@ -1,10 +1,10 @@
 <table class="table">
   <thead>
   <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Username</th>
-    <th>Action</th>
+    <th>{{'USERLIST.FIRSTNAME' | translate}}</th>
+    <th>{{'USERLIST.LASTNAME' | translate}}</th>
+    <th>{{'USERLIST.USERNAME' | translate}}</th>
+    <th>{{'USERLIST.ACTION' | translate}}</th>
   </tr>
   </thead>
   <tbody>
@@ -14,11 +14,11 @@
     <td>{{user.username}}</td>
     <td>
       <div>
-        <button class="btn btn-info rounded-pill" title="Edit this User"
+        <button class="btn btn-info rounded-pill" title="{{'USERLIST.EDITTIP' | translate }}"
                 (click)="edit(user)">
           <i class="fa fa-pencil"></i>
         </button>
-        <button class="ml-1 btn btn-danger rounded-pill"  title="Delete this User"
+        <button class="ml-1 btn btn-danger rounded-pill"  title="{{'USERLIST.DELETETIP' | translate }}"
                 (click)="delete(user)">
           <i class="fa fa-trash"></i>
         </button>

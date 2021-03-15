@@ -9,48 +9,48 @@
                formControlName="userId">
 
         <div class="form-group">
-          <label>First Name</label>
+          <label>{{'USERDETAIL.FIRSTNAME' | translate }}</label>
           <input id="firstname"
-                 placeholder="First Name"
+                 placeholder="{{'USERDETAIL.FIRSTNAME' | translate }}"
                  class="form-control"
                  type="text"
                  formControlName="firstName">
           <small *ngIf="!userDetailForm.get('firstName').valid &&
                          userDetailForm.get('firstName').hasError('forbiddenFirstName')"
-                 class="text-danger">First Name is Forbidden!</small>
+                 class="text-danger">{{'USERDETAIL.FIRSTNAMEBAD' | translate}}</small>
           <small *ngIf="!userDetailForm.get('firstName').valid &&
                          userDetailForm.get('firstName').hasError('required') &&
                          userDetailForm.get('firstName').touched"
-            class="text-danger">First Name is mandatory!</small>
+            class="text-danger">{{'USERDETAIL.FIRSTNAMEREQ' | translate}}</small>
         </div>
         <div class="form-group">
-          <label>Last Name</label>
+          <label>{{'USERDETAIL.LASTNAME' | translate }}</label>
           <input id="lastname"
-                 placeholder="Last Name"
+                 placeholder="{{'USERDETAIL.LASTNAME' | translate }}"
                  class="form-control"
                  type="text"
                  formControlName="lastName">
           <small *ngIf="!userDetailForm.get('lastName').valid &&
                          userDetailForm.get('lastName').touched"
-                class="text-danger">Last Name is mandatory!</small>
+                class="text-danger">{{'USERDETAIL.LASTNAMEREQ' | translate}}</small>
         </div>
         <div class="form-group">
-          <label>User Name</label>
+          <label>{{'USERDETAIL.USERNAME' | translate }}</label>
           <input id="username"
-                 placeholder="User Name"
+                 placeholder="{{'USERDETAIL.USERNAME' | translate }}"
                  class="form-control"
                  type="text"
                  formControlName="username">
           <small *ngIf="!userDetailForm.get('username').valid &&
                          userDetailForm.get('username').hasError('forbiddenUserName')"
-                 class="text-danger">User Name is Forbidden!</small>
+                 class="text-danger">{{'USERDETAIL.USERNAMEBAD' | translate}}</small>
           <small *ngIf="!userDetailForm.get('username').valid &&
                          userDetailForm.get('username').hasError('required') &&
                          userDetailForm.get('username').touched"
-                class="text-danger">User Name is mandatory!</small>
+                class="text-danger">{{'USERDETAIL.USERNAMEREQ' | translate}}</small>
         </div>
 
-        <hr>
+        <!-- <hr>
 
         <div formArrayName="aliases">
           <h4>Aliases</h4>
@@ -62,15 +62,15 @@
             class="form-group">
             <input [formControlName]="idx" class="form-control col-4" type="text" placeholder="Alias">
           </div>
-        </div>
+        </div> -->
 
         <div class="btn-toolbar text-center">
           <button class="btn btn-danger"
                   type="button"
-                  (click)="cancel()">Cancel</button>
+                  (click)="cancel()">{{'USERDETAIL.BTNCANCEL' | translate }}</button>
           <button class="btn btn-primary ml-2"
                   type="submit"
-                  [disabled]="!userDetailForm.valid" >Save</button>
+                  [disabled]="!userDetailForm.valid" >{{'USERDETAIL.BTNSAVE' | translate }}</button>
         </div>
 
       </form>

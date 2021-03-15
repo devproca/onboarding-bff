@@ -1,3 +1,28 @@
 {
-  "APPTITLE": "User Management System"
+  "APPTITLE": "User Management System",
+  "MAINMENU": {
+    "HOME": "Home",
+    "LIST": "List",
+    "CREATE": "Create"
+  },
+  "USERLIST": {
+    "FIRSTNAME": "First Name",
+    "LASTNAME": "Last Name",
+    "USERNAME": "Username",
+    "ACTION": "Action",
+    "EDITTIP": "Edit this User",
+    "DELETETIP": "Delete this User"
+  },
+  "USERDETAIL": {
+    "FIRSTNAME": "First Name",
+    "LASTNAME": "Last Name",
+    "USERNAME": "Username",
+    "BTNCANCEL": "Cancel",
+    "BTNSAVE": "Save",
+    "FIRSTNAMEREQ": "First Name is mandatory!",
+    "FIRSTNAMEBAD": "First Name is Forbidden!",
+    "LASTNAMEREQ": "Last Name is mandatory!",
+    "USERNAMEREQ": "Username is mandatory!",
+    "USERNAMEBAD": "Username is Forbidden!"
+  }
 }

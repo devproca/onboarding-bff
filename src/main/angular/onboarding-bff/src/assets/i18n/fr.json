@@ -1,3 +1,28 @@
 {
-  "APPTITLE": "Système de gestion des utilisateurs"
+  "APPTITLE": "Système de gestion des utilisateurs",
+  "MAINMENU": {
+    "HOME": "Accueil",
+    "LIST": "Liste",
+    "CREATE": "Création"
+  },
+  "USERLIST": {
+    "FIRSTNAME": "Prénom",
+    "LASTNAME": "Nom de famille",
+    "USERNAME": "Nom d'utilisateur",
+    "ACTION": "Action",
+    "EDITTIP": "Modifier cet utilisateur",
+    "DELETETIP": "Supprimer cet utilisateur"
+  },
+  "USERDETAIL": {
+    "FIRSTNAME": "Prénom",
+    "LASTNAME": "Nom de famille",
+    "USERNAME": "Nom d'utilisateur",
+    "BTNCANCEL": "Annuler",
+    "BTNSAVE": "Sauvegarder",
+    "FIRSTNAMEREQ": "Prénom  est obligatoire!",
+    "FIRSTNAMEBAD": "Prénom est Interdit!",
+    "LASTNAMEREQ": "Nom de famille  est obligatoire!",
+    "USERNAMEREQ": "Nom d'utilisateur est obligatoire!",
+    "USERNAMEBAD": "Nom d'utilisateur est Interdit!"
+  }
 }
