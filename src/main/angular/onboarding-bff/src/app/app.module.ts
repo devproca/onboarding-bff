@@ -2,11 +2,13 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
+import { TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {AppComponent} from './app.component';
 import {UserListComponent} from './user-list/user-list.component';
 import {UserDetailComponent} from './user-detail/user-detail.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule, HttpClient} from "@angular/common/http";
 import {DevproHttpInterceptor} from "./service/devpro-http-interceptor";
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -25,7 +27,14 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: DevproHttpInterceptor, multi: true }
@@ -33,4 +42,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   bootstrap: [AppComponent]
 })
 export class AppModule {
+}
+
+export function httpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
 }
