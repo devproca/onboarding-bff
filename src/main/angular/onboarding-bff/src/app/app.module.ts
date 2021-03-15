@@ -7,6 +7,7 @@ import {UserListComponent} from './user-list/user-list.component';
 import {UserDetailComponent} from './user-detail/user-detail.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { VerifyComponent } from './verify/verify.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import {HttpClientModule} from "@angular/common/http";
     AppComponent,
     UserListComponent,
     UserDetailComponent,
+    VerifyComponent,
 
   ],
   imports: [

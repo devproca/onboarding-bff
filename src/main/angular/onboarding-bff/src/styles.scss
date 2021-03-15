@@ -13,4 +13,8 @@
   @apply bg-blue-600 rounded p-2 opacity-75 text-white cursor-pointer hover:bg-red-400;
 }
 
+.input{
+  @apply border-b border-gray-300 p-1 w-min;
+}
+
 

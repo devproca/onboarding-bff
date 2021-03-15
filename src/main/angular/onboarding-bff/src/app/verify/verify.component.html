@@ -1,0 +1,18 @@
+<div>
+  <div *ngIf="startVerify">
+    <label>Enter phone number to validate</label>
+    <input [ngClass]="{'failed-verification' : failed}" class="input" [(ngModel)]="numberToVerify">
+    {{numberToVerify}}
+    <button class="btnclass-accept" (click)="startVerification(numberToVerify)">Submit</button>
+    <span *ngIf="failed" [ngClass]="{'failed-verification-label' : failed}">Phone Number does not exist</span>
+  </div>
+
+  <div *ngIf="!this.startVerify">
+    <label>Enter verification code for {{numberToVerify}}</label>
+    <input [ngClass]="{'failed-verification' : failed}" class="input" [(ngModel)]="verifyCode">
+    <button class="btnclass-accept" (click)="verify(numberToVerify,verifyCode)">Verify</button>
+    <span *ngIf="failed" [ngClass]="{'failed-verification-label' : failed}">Invalid Code</span>
+  </div>
+
+  <div *ngIf="!loadingSubscription.closed">LOADING!!!</div>
+</div>

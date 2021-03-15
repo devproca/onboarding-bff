@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {UserModel} from "../model/user.model";
 import {PhoneNumberModel} from "../model/phoneNumber.model";
 import {UserService} from "../service/user.service";
@@ -10,13 +10,14 @@ import {Router} from "@angular/router";
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent implements OnInit, OnDestroy {
 
   users: UserModel[] = [];
   phoneNumbers: PhoneNumberModel[] = []
   loadingSubscription = Subscription.EMPTY;
   showDeletePopUp = false;
   userId: string
+  subscriptions: Subscription[] = [];
 
   constructor(private userService: UserService,
               private router: Router) {
@@ -26,8 +27,13 @@ export class UserListComponent implements OnInit {
     this.fetchUsers();
   }
 
+  ngOnDestroy() {
+    this.subscriptions.forEach(s => s.unsubscribe());
+  }
+
   fetchUsers(): void {
-    this.loadingSubscription = this.userService.findAllUsers().subscribe(users => this.users = users);
+
+    this.subscriptions.push(this.loadingSubscription = this.userService.findAllUsers().subscribe(users => this.users = users));
   }
 
   edit(user: UserModel): void {
@@ -43,8 +49,13 @@ export class UserListComponent implements OnInit {
     this.userId = userId
   }
 
+  verify(): void {
+    this.router.navigateByUrl("/verify");
+  }
+
   confirmDelete(): void {
-    this.userService.delete(this.userId).subscribe(() => this.fetchUsers());
+    this.subscriptions.push(
+      this.userService.delete(this.userId).subscribe(() => this.fetchUsers()));
     this.closePopUp();
   }
 

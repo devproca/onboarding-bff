@@ -15,18 +15,34 @@
       <td>{{user.lastName}}</td>
       <td>{{user.username}}</td>
       <td>
-        <div *ngFor="let phonenumber of user.phoneNumbers">{{phonenumber.phoneNumber}}</div>
+        <div *ngFor="let phonenumber of user.phoneNumbers">
+          <div [ngClass]="{'unverified-number' : !phonenumber.verified}">{{phonenumber.phoneNumber}}</div>
+        </div>
       </td>
       <td><a class="btnclass-accept" (click)="edit(user)">Edit</a></td>
       <td>
         <a class="btnclass-cancel" (click)="delete(user.userId)">Delete</a>
       </td>
     </tr>
+
+    <tr class="border-none">
+      <td>
+        <div class="flex justify-center mt-2 mr-2 ">
+          <a class="btnclass-accept" (click)="create()">Add user</a>
+        </div>
+      </td>
+
+      <td>
+        <div class="flex justify-center mt-2 mr-2 ">
+          <a class="btnclass-accept" (click)="verify()">Verify phone number</a>
+        </div>
+      </td>
+    </tr>
     </tbody>
-    <div class="flex justify-center mt-2">
-      <a class="btnclass-accept" (click)="create()">Add user</a>
-    </div>
+
+
   </table>
+
 
   <div *ngIf="showDeletePopUp" class="popUp absolute left-40 top-0 ">
     <div>
