@@ -14,10 +14,12 @@
     <td>{{user.username}}</td>
     <td>
       <div>
-        <button class="btn btn-info rounded-pill" (click)="edit(user)">
+        <button class="btn btn-info rounded-pill" title="Edit this User"
+                (click)="edit(user)">
           <i class="fa fa-pencil"></i>
         </button>
-        <button class="ml-1 btn btn-danger rounded-pill" (click)="delete(user)">
+        <button class="ml-1 btn btn-danger rounded-pill"  title="Delete this User"
+                (click)="delete(user)">
           <i class="fa fa-trash"></i>
         </button>
       </div>
