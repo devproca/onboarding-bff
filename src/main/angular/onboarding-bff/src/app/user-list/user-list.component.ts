@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UserModel} from "../model/user.model";
 import {UserService} from "../service/user.service";
 import {Subscription} from "rxjs";
@@ -9,10 +9,10 @@ import {Router} from "@angular/router";
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent implements OnInit, OnDestroy {
 
   users: UserModel[] = [];
-  loadingSubscription = Subscription.EMPTY;
+  subscriptions: Subscription[] = [];
 
   constructor(private userService: UserService,
               private router: Router) {
@@ -22,26 +22,27 @@ export class UserListComponent implements OnInit {
     this.refreshData();
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subs => subs.unsubscribe());
+  }
+
   private refreshData() {
-    this.loadingSubscription =
+     const subscription =
       this.userService.findAllUsers().subscribe(
         users => this.users = users);
+     this.subscriptions.push(subscription);
   }
 
   edit(user: UserModel): void {
-    this.router.navigateByUrl(`/users/${user.userId}`);
+    this.router.navigate( ['/users', 'edit', `${user.userId}`] );
   }
 
   delete(user: UserModel): void {
     if (window.confirm(`Please confirm you wish to delete USER: ${user.username}`)) {
-      this.userService.delete(user.userId).subscribe(
+      const subscription = this.userService.delete(user.userId).subscribe(
         _ => this.refreshData());
+        this.subscriptions.push(subscription);
     }
-
   }
 
-
-  create(): void {
-    this.router.navigateByUrl("/users/create");
-  }
 }

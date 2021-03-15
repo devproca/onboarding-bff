@@ -1,20 +1,21 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserModel} from "../model/user.model";
 import {UserService} from "../service/user.service";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.scss']
 })
-export class UserDetailComponent implements OnInit {
+export class UserDetailComponent implements OnInit, OnDestroy {
 
   userDetailForm:FormGroup = null;
+  subscriptions: Subscription[] = [];
   forbiddenUserNames: string[] = ["illegal", "invalid", "fake"];
-  forbiddenFirstNames: string[] = ["enigo", "fezik"];
+  forbiddenFirstNames: string[] = ["inigo", "fezzik"];
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -27,20 +28,30 @@ export class UserDetailComponent implements OnInit {
     this.registerRouteChanges();
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subs => subs.unsubscribe());
+  }
 
   private registerRouteChanges(): void {
+    const subscription =
     this.activatedRoute.paramMap.subscribe(params => {
       const userId = params.get("userId");
       if (userId) {
         this.reloadUser(userId);
       }
     });
+    this.subscriptions.push(subscription);
   }
 
   private reloadUser(userId: string): void {
+    if (this.userDetailForm.controls.username){
+      this.userDetailForm.controls.username.disable();
+    }
+    const subscription =
     this.userService.get(userId).subscribe(user => {
       this.userDetailForm.patchValue(user);
     });
+    this.subscriptions.push(subscription);
   }
 
   private createForm(): FormGroup {
@@ -48,7 +59,7 @@ export class UserDetailComponent implements OnInit {
       userId: [''],
       firstName: ['', [Validators.required], this.isFirstNameForbiddenAsync.bind(this)],
       lastName: ['', [Validators.required]],
-      username: ['', [Validators.required, this.isNameForbidden.bind(this)] ],
+      username: [{value: '', disabled: false}, [Validators.required, this.isNameForbidden.bind(this)] ],
       aliases: this.formBuilder.array([
         this.formBuilder.control(null)
       ])
@@ -57,16 +68,19 @@ export class UserDetailComponent implements OnInit {
 
   onSubmit(): void {
     const toSave = this.userDetailForm.value as UserModel;
-
     if (toSave.userId) {
+      const subscription =
       this.userService.update(toSave)
         .subscribe(_ => this.router.navigateByUrl("/users")
         ,(error: string) => window.alert(error)  );
-    } else {
+        this.subscriptions.push(subscription);
+      } else {
+      const subscription =
       this.userService.create(toSave)
         .subscribe(_ => this.router.navigateByUrl("/users")
         , (error: string) => window.alert(error));
-    }
+        this.subscriptions.push(subscription);
+      }
   }
 
   cancel(): void {

@@ -8,13 +8,17 @@ import {UserDetailComponent} from './user-detail/user-detail.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {DevproHttpInterceptor} from "./service/devpro-http-interceptor";
+import { HomeComponent } from './home/home.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     UserListComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    HomeComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
