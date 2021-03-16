@@ -6,11 +6,16 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class LocalizeService {
 
+  defaultLanguageEnglish = 'en';
+
   constructor(private translate: TranslateService) { }
 
   setInitialLanguage(): void {
-   let browserLang = this.translate.getBrowserLang();
-   this.translate.setDefaultLang(browserLang);
+   let initialLanguage = this.translate.getBrowserLang();
+   if (initialLanguage.toLowerCase() !== this.defaultLanguageEnglish) {
+    initialLanguage = this.defaultLanguageEnglish;
+   }
+   this.translate.setDefaultLang(initialLanguage);
   }
 
   setLanguage(lang: string): void {
