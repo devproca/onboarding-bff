@@ -1,8 +1,8 @@
-package ca.devpro.controller;
+package com.onboarding.controller;
 
-import ca.devpro.api.PhoneDto;
-import ca.devpro.api.SmsDto;
-import ca.devpro.service.VerificationService;
+import com.onboarding.api.SmsDto;
+import com.onboarding.api.PhoneDto;
+import com.onboarding.client.VerificationClient;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("api/v1/verify")
+@RequestMapping("api/verify")
 public class VerificationController {
 
     @Autowired
-    private VerificationService verificationService;
+    private VerificationClient verificationClient;
 
     @PostMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
     public PhoneDto CheckVerify(@RequestBody SmsDto dto) {
-        return verificationService.checkVerification(dto);
+        return verificationClient.CheckVerify(dto);
     }
 }

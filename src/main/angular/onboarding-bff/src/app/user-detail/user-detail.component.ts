@@ -16,7 +16,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   phones: FormArray;
   userFormGroup = this.createForm();
   subscriptions: Subscription[] = [];
-
+  numberInUse = false;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -49,10 +49,10 @@ export class UserDetailComponent implements OnInit, OnDestroy {
       this.userService.get(userId).subscribe(user => {
         this.userFormGroup.patchValue(user);
         let phones = this.userFormGroup.get('phoneNumbers') as FormArray;
-        for (let i = 1; i < user.phoneNumbers.length; i++) {
-          phones.push(this.addPhoneNumberFormGroup(user.phoneNumbers[i].phoneNumber));
+        phones.clear();
+        for (let i = 0; i < user.phoneNumbers.length; i++) {
+          phones.push(this.addPhoneNumberFormGroup(user.phoneNumbers[i].phoneNumber, user.phoneNumbers[i].phoneId));
         }
-
       }));
   }
 
@@ -62,29 +62,27 @@ export class UserDetailComponent implements OnInit, OnDestroy {
       firstName: [null, [Validators.required, Validators.maxLength(50)]],
       lastName: [null, [Validators.required, Validators.maxLength(50)]],
       username: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
-      phoneNumbers: this.formBuilder.array([this.addPhoneNumberFormGroup('')])
+      phoneNumbers: this.formBuilder.array([this.addPhoneNumberFormGroup('', '')])
     });
   }
 
-
   addPhoneNumber(): void {
     this.phones = this.userFormGroup.get('phoneNumbers') as FormArray;
-    this.phones.push(this.addPhoneNumberFormGroup(''))
+    this.phones.push(this.addPhoneNumberFormGroup('', ''))
   }
 
 
-  addPhoneNumberFormGroup(phoneNumber: string): FormGroup {
+  addPhoneNumberFormGroup(phoneNumber: string, id: string): FormGroup {
     if (phoneNumber) {
       return this.formBuilder.group({
-          phoneNumber: [{
-            value: phoneNumber,
-            disabled: true
-          }, [Validators.required, Validators.pattern(this.validationService.phoneValidation)]],
+          phoneNumber: [phoneNumber, [Validators.required, Validators.pattern(this.validationService.phoneValidation)]],
+          id: id,
         }
       );
     }
     return this.formBuilder.group({
         phoneNumber: ['', [Validators.required, Validators.pattern(this.validationService.phoneValidation)]],
+        id: id,
       }
     );
   }
@@ -95,13 +93,22 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
       if (valueToSave.userId) {
         this.subscriptions.push(
-          this.userService.update(valueToSave).subscribe(_ => this.router.navigateByUrl("/users")));
+          this.userService.update(valueToSave).subscribe(_ => this.router.navigateByUrl("/users"), error => this.numberInUse = true));
       } else {
         this.subscriptions.push(
-          this.userService.create(valueToSave).subscribe(_ => this.router.navigateByUrl("/users")));
+          this.userService.create(valueToSave).subscribe(_ => this.router.navigateByUrl("/users"), error => {
+            this.numberInUse = true
+            console.log(error)
+          }));
       }
-    } else {
-      console.log(this.userFormGroup.get('firstName').errors)
+    }
+  }
+
+  deleteNumber(id: string, index: number): void {
+    let phones = this.userFormGroup.get('phoneNumbers') as FormArray;
+    phones.removeAt(index);
+    if (id) {
+      this.subscriptions.push(this.userService.deletePhoneNumber(this.userFormGroup.get('userId').value, id).subscribe())
     }
   }
 

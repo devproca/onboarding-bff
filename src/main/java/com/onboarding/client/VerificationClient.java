@@ -1,7 +1,7 @@
-package ca.devpro.client;
+package com.onboarding.client;
 
-import ca.devpro.api.PhoneDto;
-import ca.devpro.api.SmsDto;
+import com.onboarding.api.SmsDto;
+import com.onboarding.api.PhoneDto;
 
 import lombok.Setter;
 

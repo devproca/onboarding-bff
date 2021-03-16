@@ -1,6 +1,6 @@
 <div class="container">
-  <h1 class="font-bold text-xl">Add User</h1>
-  <form [formGroup]="userFormGroup">
+  <h1 class="font-bold text-xl">User</h1>
+  <form [formGroup]="userFormGroup" class="mb-3">
     <div class="formGroupContainer">
       <label>First name</label>
       <input class="input" [ngClass]="{'error-input' : userFormGroup.get('firstName').errors && (
@@ -25,15 +25,21 @@
     <div formArrayName="phoneNumbers"
          *ngFor="let phone of userFormGroup.get('phoneNumbers')['controls']; let i = index;">
       <div [formGroupName]="i" class="formGroupContainer">
-        <label>Phone number</label>
+        <label class="mb-1">Phone number
+          <button class="rounded bg-blue-400 text-white px-1 hover:bg-red-300"
+                  (click)="deleteNumber(phone.get('id').value,i)">delete
+          </button>
+        </label>
         <input formControlName="phoneNumber" [ngClass]="{'error-input' : phone.get('phoneNumber').errors && (
      phone.get('phoneNumber').touched)}" class="input">
         <span class="error-label" *ngIf=" (phone.get('phoneNumber').errors && (
      phone.get('phoneNumber').touched))">Invalid phone number</span>
       </div>
     </div>
-    <button class="btnclass-accept mb-10 ml-5" (click)="addPhoneNumber()">Add Phone Number</button>
+    <button class="btnclass-accept mb-10" (click)="addPhoneNumber()">Add Phone Number</button>
   </form>
+  <span class="error-label mb-5" *ngIf="numberInUse">A entered phone number is in use</span>
+
 
   <div class="flex">
     <a class="btnclass-cancel mr-5" (click)="cancel()">Cancel</a>

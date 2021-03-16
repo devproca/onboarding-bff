@@ -1,7 +1,6 @@
-package ca.devpro.client;
+package com.onboarding.client;
 
-import ca.devpro.api.PhoneDto;
-
+import com.onboarding.api.PhoneDto;
 import lombok.NonNull;
 import lombok.Setter;
 
@@ -10,7 +9,6 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
-
 import java.util.List;
 import java.util.UUID;
 

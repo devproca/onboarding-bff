@@ -1,6 +1,5 @@
 package com.onboarding.api;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -17,6 +16,8 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String username;
+    private List<PhoneDto> phoneNumbers;
+
 }
 
 

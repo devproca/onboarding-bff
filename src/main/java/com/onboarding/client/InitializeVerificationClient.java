@@ -1,7 +1,6 @@
-package ca.devpro.client;
+package com.onboarding.client;
 
-import ca.devpro.api.SmsDto;
-
+import com.onboarding.api.SmsDto;
 import lombok.Setter;
 
 import javax.ws.rs.client.Client;

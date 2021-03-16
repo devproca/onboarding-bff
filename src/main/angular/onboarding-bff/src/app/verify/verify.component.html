@@ -1,18 +1,26 @@
-<div>
-  <div *ngIf="startVerify">
-    <label>Enter phone number to validate</label>
-    <input [ngClass]="{'failed-verification' : failed}" class="input" [(ngModel)]="numberToVerify">
-    {{numberToVerify}}
-    <button class="btnclass-accept" (click)="startVerification(numberToVerify)">Submit</button>
+<div class="container">
+  <div *ngIf="startVerify" class="wrapper">
+    <label class="label">Enter phone number to validate</label>
+    <input [ngClass]="{'failed-verification' : failed}" class="input m-3" placeholder="phone number"
+           [(ngModel)]="numberToVerify">
+    <div class="flex">
+      <button class="btnclass-cancel m-3" (click)="cancel()">Cancel</button>
+      <button class="btnclass-accept m-3" (click)="startVerification(numberToVerify)">Submit</button>
+    </div>
     <span *ngIf="failed" [ngClass]="{'failed-verification-label' : failed}">Phone Number does not exist</span>
+    <div *ngIf="!loadingSubscription.closed">LOADING!!!</div>
   </div>
 
-  <div *ngIf="!this.startVerify">
-    <label>Enter verification code for {{numberToVerify}}</label>
-    <input [ngClass]="{'failed-verification' : failed}" class="input" [(ngModel)]="verifyCode">
-    <button class="btnclass-accept" (click)="verify(numberToVerify,verifyCode)">Verify</button>
+  <div *ngIf="!startVerify" class="wrapper">
+    <label class="label">Enter verification code for {{numberToVerify}}</label>
+    <input [ngClass]="{'failed-verification' : failed}" class="input m-3" placeholder="6 digit code"
+           [(ngModel)]="verifyCode">
+    <div class="flex">
+      <button class="btnclass-cancel m-3" (click)="startVerify = !startVerify">Cancel</button>
+      <button class="btnclass-accept m-3" (click)="verify(numberToVerify,verifyCode)">Verify</button>
+    </div>
     <span *ngIf="failed" [ngClass]="{'failed-verification-label' : failed}">Invalid Code</span>
   </div>
 
-  <div *ngIf="!loadingSubscription.closed">LOADING!!!</div>
+
 </div>

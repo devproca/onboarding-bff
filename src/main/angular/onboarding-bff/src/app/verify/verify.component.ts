@@ -43,7 +43,10 @@ export class VerifyComponent implements OnInit, OnDestroy {
       this.verifyService.verify(phoneNumber, verifyCode).subscribe(number => {
         this.verifiedNumber = number, this.router.navigateByUrl('/users')
       }, error => this.failed = true));
+  }
 
+  cancel(): void {
+    this.router.navigateByUrl('/users')
   }
 
 }

@@ -1,4 +1,4 @@
-package ca.devpro.api;
+package com.onboarding.api;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
