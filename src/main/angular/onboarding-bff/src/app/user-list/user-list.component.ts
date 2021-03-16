@@ -3,6 +3,7 @@ import {UserModel} from "../model/user.model";
 import {UserService} from "../service/user.service";
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
+import { LocalizeService } from '../service/localize.service';
 
 @Component({
   selector: 'app-user-list',
@@ -15,6 +16,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
 
   constructor(private userService: UserService,
+              private localizeService: LocalizeService,
               private router: Router) {
   }
 
@@ -38,7 +40,8 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   delete(user: UserModel): void {
-    if (window.confirm(`Please confirm you wish to delete USER: ${user.username}`)) {
+    const xlatedMsg = this.localizeService.translateNow('USERLIST.CONFIRMDELUSER');
+    if (window.confirm(`${xlatedMsg} ${user.username}`)) {
       const subscription = this.userService.delete(user.userId).subscribe(
         _ => this.refreshData());
         this.subscriptions.push(subscription);

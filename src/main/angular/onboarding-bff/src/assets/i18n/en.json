@@ -11,7 +11,8 @@
     "USERNAME": "Username",
     "ACTION": "Action",
     "EDITTIP": "Edit this User",
-    "DELETETIP": "Delete this User"
+    "DELETETIP": "Delete this User",
+    "CONFIRMDELUSER": "Please confirm you intention to delete user: "
   },
   "USERDETAIL": {
     "FIRSTNAME": "First Name",
