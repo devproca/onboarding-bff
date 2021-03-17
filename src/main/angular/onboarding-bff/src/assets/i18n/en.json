@@ -9,6 +9,7 @@
     "FIRSTNAME": "First Name",
     "LASTNAME": "Last Name",
     "USERNAME": "Username",
+    "PHONES": "Phones",
     "ACTION": "Action",
     "EDITTIP": "Edit this User",
     "DELETETIP": "Delete this User",
@@ -25,5 +26,8 @@
     "LASTNAMEREQ": "Last Name is mandatory!",
     "USERNAMEREQ": "Username is mandatory!",
     "USERNAMEBAD": "Username is Forbidden!"
+  },
+  "PAGENOTFOUND" : {
+    "HEADER": "The page you requested cannot be found"
   }
 }

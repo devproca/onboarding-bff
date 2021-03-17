@@ -9,6 +9,7 @@
     "FIRSTNAME": "Prénom",
     "LASTNAME": "Nom de famille",
     "USERNAME": "Nom d'utilisateur",
+    "PHONES": "Téléphones",
     "ACTION": "Action",
     "EDITTIP": "Modifier cet utilisateur",
     "DELETETIP": "Supprimer cet utilisateur",
@@ -25,5 +26,8 @@
     "LASTNAMEREQ": "Nom de famille  est obligatoire!",
     "USERNAMEREQ": "Nom d'utilisateur est obligatoire!",
     "USERNAMEBAD": "Nom d'utilisateur est Interdit!"
+  },
+  "PAGENOTFOUND" : {
+    "HEADER": "La page que vous recherchez n'a pu être trouvée"
   }
 }

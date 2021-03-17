@@ -10,13 +10,14 @@ import java.util.UUID;
 
 @Data
 @Accessors(chain = true)
-@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDto {
 
     private UUID userId;
     private String firstName;
     private String lastName;
     private String username;
+    private List<PhoneDto> phones;
 }
 
 

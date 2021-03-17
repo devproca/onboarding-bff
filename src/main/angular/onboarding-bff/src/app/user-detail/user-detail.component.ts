@@ -11,7 +11,10 @@ import {Observable, Subscription} from "rxjs";
   styleUrls: ['./user-detail.component.scss']
 })
 export class UserDetailComponent implements OnInit, OnDestroy {
-
+users: {phoneId:string, userId:string, kind:string, telNumber:string}[] = [
+  {phoneId: 'asdlfkjaslfkjasldkfjaslkdf', userId: 'oiuyqweoriuyewu', kind:'Mobile', telNumber: '5145551212'}
+  ,{phoneId: '897894213hjkhjfwqd', userId: 'oiuyqweoriuyewu', kind:'Home', telNumber: '5145552121'}
+];
   userDetailForm:FormGroup = null;
   subscriptions: Subscription[] = [];
   forbiddenUserNames: string[] = ["illegal", "invalid", "fake"];

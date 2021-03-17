@@ -1,7 +1,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-sm-offset-2 mt-sm-2 mt-md-4 mt-lg-4">
+    <div class="col-lg-4 col-md-4 col-sm-4 mt-lg-2 mt-md-4 mt-sm-2">
       <form [formGroup]="userDetailForm" (ngSubmit)="onSubmit()" >
 
         <input id="userId"
@@ -50,20 +50,6 @@
                 class="text-danger">{{'USERDETAIL.USERNAMEREQ' | translate}}</small>
         </div>
 
-        <!-- <hr>
-
-        <div formArrayName="aliases">
-          <h4>Aliases</h4>
-           <button class="btn btn-info mb-2"
-                   type="button"
-                   (click)="addAlias()"
-           >Add Alias</button>
-          <div *ngFor="let aliasControl of getAliases().controls; let idx = index"
-            class="form-group">
-            <input [formControlName]="idx" class="form-control col-4" type="text" placeholder="Alias">
-          </div>
-        </div> -->
-
         <div class="btn-toolbar text-center">
           <button class="btn btn-danger"
                   type="button"
@@ -74,9 +60,34 @@
         </div>
 
       </form>
+    </div> <!-- col-md-4 -->
+
+    <div class="col-lg-5 col-md-5 col-sm-5 ml-md-4">
+
+      <table class="table table-sm table-hover table-borderless ">
+        <thead>
+        <tr>
+          <th>Phone Type</th>
+          <th>Phone Number</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users">
+          <td class="hidden">{{user.userId}}</td>
+          <td class="hidden">{{user.phoneId}}</td>
+          <td>{{user.kind}}</td>
+          <td>{{user.telNumber}}</td>
+        </tr>
+        </tbody>
+      </table>
+
+
     </div>
-  </div>
-</div>
+
+
+
+  </div>  <!-- row -->
+</div> <!-- container -->
 
 <br>
 {{userDetailForm.value | json}}
