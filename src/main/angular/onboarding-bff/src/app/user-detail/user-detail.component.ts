@@ -14,6 +14,7 @@ import { PhoneModel } from '../model/phone.model';
 export class UserDetailComponent implements OnInit, OnDestroy {
 
   userIdForUpdate: string = null;
+  formValueChanges: string = null;
   showModal: boolean = false;
   userDetailForm:FormGroup = null;
   subscriptions: Subscription[] = [];
@@ -31,7 +32,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     this.registerRouteChanges();
     const subscription =
     this.userDetailForm.valueChanges.subscribe(val => {
-      console.log(JSON.stringify(val));
+      this.formValueChanges = JSON.stringify(val);
     });
     this.subscriptions.push(subscription);
   }
@@ -58,6 +59,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     const subscription =
     this.userService.get(userId).subscribe(user => {
       this.userDetailForm.patchValue(user);
+      user.phones.forEach(ph => this.onHandleAddUserPhone(ph));
     });
     this.subscriptions.push(subscription);
   }
@@ -123,20 +125,15 @@ export class UserDetailComponent implements OnInit, OnDestroy {
       (<FormArray>this.userDetailForm.get('phones')).push( this.addPhoneFormGroup(newPhone) );
     }
     this.showModal = false;
-    console.log("onHandleCloseModal->", newPhone);
   }
 
   addPhoneFormGroup(srcPhone: PhoneModel): FormGroup {
     return this.formBuilder.group({
       userId: [this.userIdForUpdate],
-      phoneId: [null],
+      phoneId: [srcPhone.phoneId],
       kind: [srcPhone.kind],
       telNumber: [srcPhone.telNumber]
     });
-  }
-
-  getPhones(): FormArray {
-    return this.userDetailForm.get('phones') as FormArray;
   }
 
   logKeyValuePairs(group: FormGroup): void {

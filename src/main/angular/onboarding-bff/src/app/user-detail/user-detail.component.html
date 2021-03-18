@@ -92,7 +92,7 @@
 -->
 
 
-            <table class="table table-hover">
+            <table class="table table-hover table-responsive">
               <thead>
               <tr>
                 <th>Type</th>
@@ -101,11 +101,20 @@
               </thead>
               <tbody>
               <tr formArrayName="phones"  *ngFor="let phone of userDetailForm.get('phones')['controls']; let idx = index">
+
+                <td [formGroupName]="idx" class="dv-pro-hidden">
+                  <input formControlName="userId">
+                </td>
+
+                <td [formGroupName]="idx" class="dv-pro-hidden">
+                  <input formControlName="phoneId">
+                </td>
+
                 <td [formGroupName]="idx">
                   <input class="form-control" formControlName="kind" [id]="'kind'+idx" type="text" readonly >
                 </td>
                 <td [formGroupName]="idx">
-                  <input class="form-control" formControlName="telNumber" [id]="'telNumber'+idx"  type="text" readonly>
+                  <input class="form-control dv-pro-pad" formControlName="telNumber" [id]="'telNumber'+idx"  type="text" readonly>
                 </td>
 
                 <td>
@@ -142,6 +151,10 @@
 <br>
 Form Status:
 {{userDetailForm.status}}
+<br>
+Form Value Changes:
+<br>
+{{formValueChanges}}
 
 <app-add-phone-modal *ngIf="showModal" (closeModal)="onHandleAddUserPhone($event)" ></app-add-phone-modal>
 

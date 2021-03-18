@@ -48,7 +48,4 @@ export class UserListComponent implements OnInit, OnDestroy {
     }
   }
 
-  // getUserPhones(user: UserModel): any {
-  //   user.phones
-  // }
 }
