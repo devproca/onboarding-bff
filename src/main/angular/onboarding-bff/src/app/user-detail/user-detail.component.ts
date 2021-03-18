@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {UserModel} from "../model/user.model";
 import {UserService} from "../service/user.service";
 import {Observable, Subscription} from "rxjs";
+import { PhoneModel } from '../model/phone.model';
 
 @Component({
   selector: 'app-user-detail',
@@ -11,10 +12,9 @@ import {Observable, Subscription} from "rxjs";
   styleUrls: ['./user-detail.component.scss']
 })
 export class UserDetailComponent implements OnInit, OnDestroy {
-users: {phoneId:string, userId:string, kind:string, telNumber:string}[] = [
-  {phoneId: 'asdlfkjaslfkjasldkfjaslkdf', userId: 'oiuyqweoriuyewu', kind:'Mobile', telNumber: '5145551212'}
-  ,{phoneId: '897894213hjkhjfwqd', userId: 'oiuyqweoriuyewu', kind:'Home', telNumber: '5145552121'}
-];
+
+  userIdForUpdate: string = null;
+  showModal: boolean = false;
   userDetailForm:FormGroup = null;
   subscriptions: Subscription[] = [];
   forbiddenUserNames: string[] = ["illegal", "invalid", "fake"];
@@ -29,6 +29,11 @@ users: {phoneId:string, userId:string, kind:string, telNumber:string}[] = [
   ngOnInit(): void {
     this.userDetailForm = this.createForm();
     this.registerRouteChanges();
+    const subscription =
+    this.userDetailForm.valueChanges.subscribe(val => {
+      console.log(JSON.stringify(val));
+    });
+    this.subscriptions.push(subscription);
   }
 
   ngOnDestroy(): void {
@@ -38,9 +43,9 @@ users: {phoneId:string, userId:string, kind:string, telNumber:string}[] = [
   private registerRouteChanges(): void {
     const subscription =
     this.activatedRoute.paramMap.subscribe(params => {
-      const userId = params.get("userId");
-      if (userId) {
-        this.reloadUser(userId);
+      this.userIdForUpdate = params.get("userId");
+      if (this.userIdForUpdate) {
+        this.reloadUser(this.userIdForUpdate);
       }
     });
     this.subscriptions.push(subscription);
@@ -63,9 +68,7 @@ users: {phoneId:string, userId:string, kind:string, telNumber:string}[] = [
       firstName: ['', [Validators.required], this.isFirstNameForbiddenAsync.bind(this)],
       lastName: ['', [Validators.required]],
       username: [{value: '', disabled: false}, [Validators.required, this.isNameForbidden.bind(this)] ],
-      aliases: this.formBuilder.array([
-        this.formBuilder.control(null)
-      ])
+      phones: this.formBuilder.array([ ])
     });
   }
 
@@ -90,14 +93,6 @@ users: {phoneId:string, userId:string, kind:string, telNumber:string}[] = [
     this.router.navigateByUrl("/users");
   }
 
-  addAlias(): void {
-    const control = new FormControl(null, [Validators.required]);
-    this.getAliases().push(control);
-  }
-
-  getAliases(): FormArray {
-    return this.userDetailForm.get('aliases') as FormArray;
-  }
 
   isFirstNameForbiddenAsync(control: FormControl): Promise<any> | Observable<any> {
     return new Promise<any>(
@@ -118,4 +113,67 @@ users: {phoneId:string, userId:string, kind:string, telNumber:string}[] = [
             { 'forbiddenUserName': true } : null;
   }
 
+  showAddPhoneModal(): void {
+    this.showModal = !this.showModal;
+    //this.logKeyValuePairs(this.userDetailForm)
+  }
+
+  onHandleAddUserPhone(newPhone: PhoneModel): void {
+
+    if (newPhone.telNumber) {
+
+      //const phones = this.getPhones();
+      //phones.push(this.addPhoneFormGroup(newPhone));
+                  // let user = this.userDetailForm.value as UserModel;
+                  // const addingPhone = this.createPhone(this.userIdForUpdate, newPhone);
+                  // user.phones.push(addingPhone);
+      //this.userDetailForm.patchValue(user);
+
+      (<FormArray>this.userDetailForm.get('phones')).push( this.addPhoneFormGroup(newPhone) );
+
+
+
+    }
+
+    this.showModal = false;
+    console.log("onHandleCloseModal->", newPhone);
+  }
+
+
+
+  createPhone(userId: string, newPhone: PhoneModel): PhoneModel {
+    const addPhone  = new PhoneModel();
+    if (userId) {
+      addPhone.userId = userId;
+    }
+    addPhone.kind = newPhone.kind;
+    addPhone.telNumber = newPhone.telNumber;
+  return addPhone;
+  }
+
+  addPhoneFormGroup(srcPhone: PhoneModel): FormGroup {
+    return this.formBuilder.group({
+      userId: ['TEST-userId'],
+      phoneId: ['phoneId-Test'],
+      kind: [srcPhone.kind],
+      telNumber: [srcPhone.telNumber]
+    });
+  }
+
+
+  getPhones(): FormArray {
+    return this.userDetailForm.get('phones') as FormArray;
+  }
+
+
+  logKeyValuePairs(group: FormGroup): void {
+   Object.keys(group.controls).forEach( (key: string) => {
+     const abstractControl = group.get(key);
+     if (abstractControl instanceof FormGroup) {
+      this.logKeyValuePairs(abstractControl);
+     } else {
+       console.log(`Key= ${key}   Value=${abstractControl.value}`);
+     }
+   });
+  }
 }

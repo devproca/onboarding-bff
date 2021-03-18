@@ -12,6 +12,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule, HttpClient} from "@angular/common/h
 import {DevproHttpInterceptor} from "./service/devpro-http-interceptor";
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AddPhoneModalComponent } from './shared/add-phone-modal/add-phone-modal.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     UserListComponent,
     UserDetailComponent,
     HomeComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AddPhoneModalComponent
   ],
   imports: [
     BrowserModule,

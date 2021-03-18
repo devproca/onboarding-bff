@@ -1,6 +1,8 @@
 
 <div class="container">
   <div class="row">
+
+
     <div class="col-lg-4 col-md-4 col-sm-4 mt-lg-2 mt-md-4 mt-sm-2">
       <form [formGroup]="userDetailForm" (ngSubmit)="onSubmit()" >
 
@@ -9,7 +11,7 @@
                formControlName="userId">
 
         <div class="form-group">
-          <label>{{'USERDETAIL.FIRSTNAME' | translate }}</label>
+          <label for="firstname" >{{'USERDETAIL.FIRSTNAME' | translate }}</label>
           <input id="firstname"
                  placeholder="{{'USERDETAIL.FIRSTNAME' | translate }}"
                  class="form-control"
@@ -24,7 +26,7 @@
             class="text-danger">{{'USERDETAIL.FIRSTNAMEREQ' | translate}}</small>
         </div>
         <div class="form-group">
-          <label>{{'USERDETAIL.LASTNAME' | translate }}</label>
+          <label for="lastname">{{'USERDETAIL.LASTNAME' | translate }}</label>
           <input id="lastname"
                  placeholder="{{'USERDETAIL.LASTNAME' | translate }}"
                  class="form-control"
@@ -35,7 +37,7 @@
                 class="text-danger">{{'USERDETAIL.LASTNAMEREQ' | translate}}</small>
         </div>
         <div class="form-group">
-          <label>{{'USERDETAIL.USERNAME' | translate }}</label>
+          <label for="username">{{'USERDETAIL.USERNAME' | translate }}</label>
           <input id="username"
                  placeholder="{{'USERDETAIL.USERNAME' | translate }}"
                  class="form-control"
@@ -51,6 +53,8 @@
         </div>
 
         <div class="btn-toolbar text-center">
+
+
           <button class="btn btn-danger"
                   type="button"
                   (click)="cancel()">{{'USERDETAIL.BTNCANCEL' | translate }}</button>
@@ -59,38 +63,37 @@
                   [disabled]="!userDetailForm.valid" >{{'USERDETAIL.BTNSAVE' | translate }}</button>
         </div>
 
+
+          <div  formArrayName="phones"  *ngFor="let phone of userDetailForm.get('phones')['controls']; let idx = index">
+
+              <div [formGroupName]="idx">
+
+                <input formControlName="userId">
+                <input formControlName="phoneId">
+                <input formControlName="kind">
+                <input formControlName="telNumber">
+
+              </div>
+
+          </div>
+
+
       </form>
-    </div> <!-- col-md-4 -->
-
-    <div class="col-lg-5 col-md-5 col-sm-5 ml-md-4">
-
-      <table class="table table-sm table-hover table-borderless ">
-        <thead>
-        <tr>
-          <th>Phone Type</th>
-          <th>Phone Number</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let user of users">
-          <td class="hidden">{{user.userId}}</td>
-          <td class="hidden">{{user.phoneId}}</td>
-          <td>{{user.kind}}</td>
-          <td>{{user.telNumber}}</td>
-        </tr>
-        </tbody>
-      </table>
-
-
     </div>
-
 
 
   </div>  <!-- row -->
 </div> <!-- container -->
+
 
 <br>
 {{userDetailForm.value | json}}
 <br>
 Form Status:
 {{userDetailForm.status}}
+
+<br>
+<button class="btn btn-success" [disabled]="!userDetailForm.valid" (click)="showAddPhoneModal()" >Add Phone</button>
+<app-add-phone-modal *ngIf="showModal" (closeModal)="onHandleAddUserPhone($event)" ></app-add-phone-modal>
+
+

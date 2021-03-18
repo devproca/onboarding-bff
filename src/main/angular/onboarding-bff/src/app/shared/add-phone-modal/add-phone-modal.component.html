@@ -1,0 +1,28 @@
+<div class="backdrop"></div>
+<div class="alert-box">
+
+  <form [formGroup]="addPhoneForm" >
+    <div class="form-group">
+      <label for="phone-type">Phone Type</label>
+      <input id="phone-type"
+            placeholder="Phone Type"
+            class="form-control"
+            type="text"
+            formControlName="kind">
+    </div>
+
+    <div class="form-group">
+      <label for="phone-number">Phone Number</label>
+      <input id="phone-number"
+            placeholder="Phone Number"
+            class="form-control"
+            type="text"
+            formControlName="telNumber">
+    </div>
+  </form>
+
+   <div class="alert-box-actions">
+     <button class="btn btn-danger" type="button" (click)="onDismissModal()">Close</button>
+     <button class="btn btn-primary" type="button" [disabled]="!addPhoneForm.valid" (click)="onAddPhone()" >Add</button>
+   </div>
+</div>
