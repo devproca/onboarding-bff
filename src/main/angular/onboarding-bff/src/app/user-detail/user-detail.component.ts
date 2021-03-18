@@ -119,52 +119,25 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   }
 
   onHandleAddUserPhone(newPhone: PhoneModel): void {
-
     if (newPhone.telNumber) {
-
-      //const phones = this.getPhones();
-      //phones.push(this.addPhoneFormGroup(newPhone));
-                  // let user = this.userDetailForm.value as UserModel;
-                  // const addingPhone = this.createPhone(this.userIdForUpdate, newPhone);
-                  // user.phones.push(addingPhone);
-      //this.userDetailForm.patchValue(user);
-
       (<FormArray>this.userDetailForm.get('phones')).push( this.addPhoneFormGroup(newPhone) );
-
-
-
     }
-
     this.showModal = false;
     console.log("onHandleCloseModal->", newPhone);
   }
 
-
-
-  createPhone(userId: string, newPhone: PhoneModel): PhoneModel {
-    const addPhone  = new PhoneModel();
-    if (userId) {
-      addPhone.userId = userId;
-    }
-    addPhone.kind = newPhone.kind;
-    addPhone.telNumber = newPhone.telNumber;
-  return addPhone;
-  }
-
   addPhoneFormGroup(srcPhone: PhoneModel): FormGroup {
     return this.formBuilder.group({
-      userId: ['TEST-userId'],
-      phoneId: ['phoneId-Test'],
+      userId: [this.userIdForUpdate],
+      phoneId: [null],
       kind: [srcPhone.kind],
       telNumber: [srcPhone.telNumber]
     });
   }
 
-
   getPhones(): FormArray {
     return this.userDetailForm.get('phones') as FormArray;
   }
-
 
   logKeyValuePairs(group: FormGroup): void {
    Object.keys(group.controls).forEach( (key: string) => {
