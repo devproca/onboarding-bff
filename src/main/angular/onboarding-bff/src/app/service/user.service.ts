@@ -34,7 +34,4 @@ export class UserService {
     return this.http.delete<UserModel>(`${BASE_URI}/${userId}`);
   }
 
-  deletePhoneNumber(userId: string, phoneId:string): Observable<UserModel>{
-    return this.http.delete<UserModel>(`${BASE_URI}/${userId}/phonenumbers/${phoneId}`)
-  }
 }

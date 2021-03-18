@@ -31,14 +31,14 @@ public class PhoneController {
     @ResponseStatus(HttpStatus.CREATED)
     public PhoneDto create(@PathVariable("userId") UUID userId, @RequestBody PhoneDto dto) {
         dto.setUserId(userId);
-        return phoneClient.create(userId,dto);
+        return phoneClient.create(userId, dto);
     }
 
     @PutMapping("/{phoneId}")
     public PhoneDto update(@PathVariable("userId") UUID userId, @PathVariable("phoneId") UUID phoneId, @RequestBody PhoneDto dto) {
         dto.setUserId(userId);
         dto.setPhoneId(phoneId);
-        return phoneClient.update(userId,dto);
+        return phoneClient.update(userId, dto);
     }
 
     @DeleteMapping("/{phoneId}")

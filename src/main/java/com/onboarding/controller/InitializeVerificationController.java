@@ -17,7 +17,9 @@ public class InitializeVerificationController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public SmsDto StartVerify(@RequestBody SmsDto dto){
+    public SmsDto StartVerify(@RequestBody SmsDto dto) {
         return initializeVerificationClient.StartVerify(dto);
-    };
+    }
+
+    ;
 }

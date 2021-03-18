@@ -17,6 +17,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   userFormGroup = this.createForm();
   subscriptions: Subscription[] = [];
   numberInUse = false;
+  numberRequired = false;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -73,42 +74,56 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
 
   addPhoneNumberFormGroup(phoneNumber: string, id: string): FormGroup {
+    this.numberRequired = false;
     if (phoneNumber) {
       return this.formBuilder.group({
           phoneNumber: [phoneNumber, [Validators.required, Validators.pattern(this.validationService.phoneValidation)]],
-          id: id,
+          phoneId: id,
         }
       );
     }
     return this.formBuilder.group({
         phoneNumber: ['', [Validators.required, Validators.pattern(this.validationService.phoneValidation)]],
-        id: id,
+        phoneId: id,
       }
     );
   }
 
   save(): void {
-    if (this.userFormGroup.dirty && this.userFormGroup.valid) {
+    if (this.userFormGroup.valid) {
       let valueToSave = this.userFormGroup.value as UserModel;
-
       if (valueToSave.userId) {
         this.subscriptions.push(
-          this.userService.update(valueToSave).subscribe(_ => this.router.navigateByUrl("/users"), error => this.numberInUse = true));
+          this.userService.update(valueToSave).subscribe(_ => this.router.navigateByUrl("/users"), error => {
+            if (this.userFormGroup.get('phoneNumbers.length')) {
+              this.numberInUse = true;
+            } else if (!this.userFormGroup.get('phoneNumbers.length')) {
+              this.numberRequired = true;
+            } else {
+              console.log(error);
+            }
+          }));
       } else {
         this.subscriptions.push(
           this.userService.create(valueToSave).subscribe(_ => this.router.navigateByUrl("/users"), error => {
-            this.numberInUse = true
-            console.log(error)
+            if (this.userFormGroup.get('phoneNumbers.length')) {
+              this.numberInUse = true;
+            } else if (!this.userFormGroup.get('phoneNumbers.length')) {
+              this.numberRequired = true;
+            } else {
+              console.log(error);
+            }
           }));
       }
     }
   }
 
-  deleteNumber(id: string, index: number): void {
+  deleteNumber(index: number): void {
     let phones = this.userFormGroup.get('phoneNumbers') as FormArray;
-    phones.removeAt(index);
-    if (id) {
-      this.subscriptions.push(this.userService.deletePhoneNumber(this.userFormGroup.get('userId').value, id).subscribe())
+    if (phones.length > 1) {
+      phones.removeAt(index);
+    } else {
+      this.numberRequired = true;
     }
   }
 

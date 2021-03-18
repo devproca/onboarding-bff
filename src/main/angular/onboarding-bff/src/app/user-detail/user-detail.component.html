@@ -27,7 +27,7 @@
       <div [formGroupName]="i" class="formGroupContainer">
         <label class="mb-1">Phone number
           <button class="rounded bg-blue-400 text-white px-1 hover:bg-red-300"
-                  (click)="deleteNumber(phone.get('id').value,i)">delete
+                  (click)="deleteNumber(i)">delete
           </button>
         </label>
         <input formControlName="phoneNumber" [ngClass]="{'error-input' : phone.get('phoneNumber').errors && (
@@ -38,6 +38,7 @@
     </div>
     <button class="btnclass-accept mb-10" (click)="addPhoneNumber()">Add Phone Number</button>
   </form>
+  <span class="error-label mb-5" *ngIf="numberRequired">A phone number is required</span>
   <span class="error-label mb-5" *ngIf="numberInUse">A entered phone number is in use</span>
 
 
