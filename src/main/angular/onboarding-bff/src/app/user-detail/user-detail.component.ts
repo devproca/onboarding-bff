@@ -13,6 +13,7 @@ import { PhoneModel } from '../model/phone.model';
 })
 export class UserDetailComponent implements OnInit, OnDestroy {
 
+  fixedUsername: string = null;
   userIdForUpdate: string = null;
   formValueChanges: string = null;
   showModal: boolean = false;
@@ -53,13 +54,11 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   }
 
   private reloadUser(userId: string): void {
-    if (this.userDetailForm.controls.username){
-      this.userDetailForm.controls.username.disable();
-    }
     const subscription =
     this.userService.get(userId).subscribe(user => {
-      this.userDetailForm.patchValue(user);
       user.phones.forEach(ph => this.onHandleAddUserPhone(ph));
+      this.userDetailForm.patchValue(user);
+      this.fixedUsername = "yes";
     });
     this.subscriptions.push(subscription);
   }

@@ -45,6 +45,7 @@
                   placeholder="{{'USERDETAIL.USERNAME' | translate }}"
                   class="form-control"
                   type="text"
+                  [attr.readonly]="fixedUsername"
                   formControlName="username">
             <small *ngIf="!userDetailForm.get('username').valid &&
                           userDetailForm.get('username').hasError('forbiddenUserName')"
