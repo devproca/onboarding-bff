@@ -76,10 +76,18 @@
             <div  formArrayName="phones"  *ngFor="let phone of userDetailForm.get('phones')['controls']; let idx = index">
                 <div [formGroupName]="idx">
 
-                  <input formControlName="userId">
-                  <input formControlName="phoneId">
-                  <input formControlName="kind">
-                  <input formControlName="telNumber">
+
+                  <div class="form-group mt-2">
+                        <!--
+                          <input formControlName="userId">
+                          <input formControlName="phoneId">
+                        -->
+
+                        <label [attr.for]="'kind'+idx">Type</label>
+                        <input class="form-control" formControlName="kind" [id]="'kind'+idx" type="text" readonly >
+                        <label [attr.for]="'telNumber'+idx">Telephone</label>
+                        <input class="form-control" formControlName="telNumber" [id]="'telNumber'+idx"  type="text" readonly>
+                   </div>
 
                 </div>
             </div>
