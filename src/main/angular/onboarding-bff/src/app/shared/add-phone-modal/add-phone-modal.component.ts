@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PhoneModel } from 'src/app/model/phone.model';
 
@@ -9,6 +9,7 @@ import { PhoneModel } from 'src/app/model/phone.model';
 })
 export class AddPhoneModalComponent implements OnInit {
 
+  @Input() srcPhone: PhoneModel = null;
   @Output() closeModal = new EventEmitter<PhoneModel>();
   addPhoneForm:FormGroup = null;
   result: PhoneModel = new PhoneModel();
@@ -16,7 +17,10 @@ export class AddPhoneModalComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.addPhoneForm = this.createForm()
+    this.addPhoneForm = this.createForm();
+    if (this.srcPhone !== null) {
+      this.addPhoneForm.patchValue(this.srcPhone);
+    }
   }
 
   private createForm(): FormGroup {

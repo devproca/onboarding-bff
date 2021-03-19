@@ -14,7 +14,7 @@ export class DevproHttpInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log("DevproHttpInterceptor.request->", request);
+    //console.log("DevproHttpInterceptor.request->", request);
     return next.handle(request)
       .pipe(
         catchError((error: HttpErrorResponse) => {

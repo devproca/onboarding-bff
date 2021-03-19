@@ -1,8 +1,6 @@
 
 <div class="container">
 
-
-
     <form [formGroup]="userDetailForm" (ngSubmit)="onSubmit()" >
 
       <input id="userId"
@@ -11,6 +9,7 @@
 
       <div class="row">
 
+        <!-- Begin Form Left Side -->
         <div class="col-lg-4 col-md-4 col-sm-4 mt-lg-2 mt-md-4 mt-sm-2">
 
           <div class="form-group">
@@ -66,38 +65,21 @@
           </div>
 
         </div>
-        <!-- <div class="col-lg-4 col-md-4 col-sm-4 mt-lg-2 mt-md-4 mt-sm-2">   -->
+        <!-- End Form Left Side -->
 
+        <!-- Begin Form Right Side -->
         <div class="col-lg-4 col-md-4 col-sm-4 mt-lg-2 mt-md-4 mt-sm-2">
 
-            <div class="btn-toolbar text-center">
+            <div class="btn-toolbar text-center mb-2">
               <button class="btn btn-success" type="button" [disabled]="!userDetailForm.valid" (click)="showAddPhoneModal()" >Add Phone</button>
             </div>
-<!--
-            <div  formArrayName="phones"  *ngFor="let phone of userDetailForm.get('phones')['controls']; let idx = index">
-                <div [formGroupName]="idx">
 
-                  <div class="form-group mt-2">
-
-                          <input formControlName="userId">
-                          <input formControlName="phoneId">
-
-                        <label [attr.for]="'kind'+idx">Type</label>
-                        <input class="form-control" formControlName="kind" [id]="'kind'+idx" type="text" readonly >
-                        <label [attr.for]="'telNumber'+idx">Telephone</label>
-                        <input class="form-control" formControlName="telNumber" [id]="'telNumber'+idx"  type="text" readonly>
-                   </div>
-
-                </div>
-            </div>
--->
-
-
-            <table class="table table-hover table-responsive">
+            <table class="table table-responsive dv-pro-tbl">
               <thead>
               <tr>
                 <th>Type</th>
                 <th>Number</th>
+                <th>Action</th>
               </tr>
               </thead>
               <tbody>
@@ -119,16 +101,16 @@
                 </td>
 
                 <td>
-                  <!-- <div>
-                    <button class="btn btn-info rounded-pill" title="{{'USERLIST.EDITTIP' | translate }}"
-                            (click)="edit(user)">
+                  <div>
+                    <button class="btn btn-info rounded-pill" title="edit phone" type="button"
+                            (click)="editPhone(idx)">
                       <i class="fa fa-pencil"></i>
                     </button>
-                    <button class="ml-1 btn btn-danger rounded-pill"  title="{{'USERLIST.DELETETIP' | translate }}"
-                            (click)="delete(user)">
+                    <button class="ml-1 btn btn-danger rounded-pill"  title="delete phone" type="button"
+                            (click)="deletePhone(idx)">
                       <i class="fa fa-trash"></i>
                     </button>
-                  </div> -->
+                  </div>
 
                 </td>
               </tr>
@@ -137,16 +119,16 @@
 
 
         </div>
+        <!-- End Form Right Side -->
 
       </div>  <!-- row -->
+
     </form>
-
-
-
 
 </div> <!-- container -->
 
-
+<br>
+Form Value:
 <br>
 {{userDetailForm.value | json}}
 <br>
@@ -157,6 +139,6 @@ Form Value Changes:
 <br>
 {{formValueChanges}}
 
-<app-add-phone-modal *ngIf="showModal" (closeModal)="onHandleAddUserPhone($event)" ></app-add-phone-modal>
+<app-add-phone-modal *ngIf="showModal" [srcPhone]="phoneToEdit" (closeModal)="onHandleAddUserPhone($event)" ></app-add-phone-modal>
 
 

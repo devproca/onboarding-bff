@@ -13,6 +13,7 @@ import { PhoneModel } from '../model/phone.model';
 })
 export class UserDetailComponent implements OnInit, OnDestroy {
 
+  phoneToEdit: PhoneModel = null;
   fixedUsername: string = null;
   userIdForUpdate: string = null;
   formValueChanges: string = null;
@@ -21,6 +22,10 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   forbiddenUserNames: string[] = ["illegal", "invalid", "fake"];
   forbiddenFirstNames: string[] = ["inigo", "fezzik"];
+
+  get phoneForms(): FormArray {
+    return this.userDetailForm.get('phones') as FormArray;
+  }
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -116,12 +121,12 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
   showAddPhoneModal(): void {
     this.showModal = !this.showModal;
-    //this.logKeyValuePairs(this.userDetailForm)
   }
 
   onHandleAddUserPhone(newPhone: PhoneModel): void {
+    this.phoneToEdit = null;
     if (newPhone.telNumber) {
-      (<FormArray>this.userDetailForm.get('phones')).push( this.addPhoneFormGroup(newPhone) );
+      this.phoneForms.push( this.addPhoneFormGroup(newPhone) );
     }
     this.showModal = false;
   }
@@ -133,6 +138,18 @@ export class UserDetailComponent implements OnInit, OnDestroy {
       kind: [srcPhone.kind],
       telNumber: [srcPhone.telNumber]
     });
+  }
+
+  editPhone(idx: number): void {
+    this.phoneToEdit = this.phoneForms.value[idx];
+    this.showAddPhoneModal();
+  }
+
+  deletePhone(idx: number): void {
+    const xlatedMsg = "Please confirm your intention to delete phone: "
+    if (window.confirm(`${xlatedMsg}\n${this.phoneForms.value[idx].kind}\n${this.phoneForms.value[idx].telNumber}`)) {
+      this.phoneForms.removeAt(idx);
+    }
   }
 
   logKeyValuePairs(group: FormGroup): void {
