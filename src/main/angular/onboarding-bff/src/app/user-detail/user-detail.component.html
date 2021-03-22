@@ -71,15 +71,15 @@
         <div class="col-lg-4 col-md-4 col-sm-4 mt-lg-2 mt-md-4 mt-sm-2">
 
             <div class="btn-toolbar text-center mb-2">
-              <button class="btn btn-success" type="button" [disabled]="!userDetailForm.valid" (click)="showAddPhoneModal()" >Add Phone</button>
+              <button class="btn btn-success" type="button" [disabled]="!userDetailForm.valid" (click)="showAddPhoneModal()" >{{'USERDETAIL.BTNADDPHONE' | translate}}</button>
             </div>
 
             <table class="table table-responsive dv-pro-tbl">
               <thead>
               <tr>
-                <th>Type</th>
-                <th>Number</th>
-                <th>Action</th>
+                <th>{{'USERDETAIL.PHONETYPE' | translate }}</th>
+                <th>{{'USERDETAIL.PHONENUMBER' | translate }}</th>
+                <th>{{'USERDETAIL.ACTION' | translate }}</th>
               </tr>
               </thead>
               <tbody>
@@ -102,11 +102,11 @@
 
                 <td>
                   <div>
-                    <button class="btn btn-info rounded-pill" title="edit phone" type="button"
+                    <button class="btn btn-info rounded-pill" title="{{'USERDETAIL.EDITPHONE' | translate}}" type="button"
                             (click)="editPhone(idx)">
                       <i class="fa fa-pencil"></i>
                     </button>
-                    <button class="ml-1 btn btn-danger rounded-pill"  title="delete phone" type="button"
+                    <button class="ml-1 btn btn-danger rounded-pill"  title="{{'USERDETAIL.DELETEPHONE' | translate}}" type="button"
                             (click)="deletePhone(idx)">
                       <i class="fa fa-trash"></i>
                     </button>

@@ -5,6 +5,7 @@ import {UserModel} from "../model/user.model";
 import {UserService} from "../service/user.service";
 import {Observable, Subscription} from "rxjs";
 import { PhoneModel } from '../model/phone.model';
+import { LocalizeService } from '../service/localize.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -30,6 +31,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder,
               private router: Router,
               private activatedRoute: ActivatedRoute,
+              private localizeService: LocalizeService,
               private userService: UserService) {
   }
 
@@ -146,7 +148,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   }
 
   deletePhone(idx: number): void {
-    const xlatedMsg = "Please confirm your intention to delete phone: "
+    const xlatedMsg = this.localizeService.translateNow('USERDETAIL.CONFIRMDELETEPHONE');
     if (window.confirm(`${xlatedMsg}\n${this.phoneForms.value[idx].kind}\n${this.phoneForms.value[idx].telNumber}`)) {
       this.phoneForms.removeAt(idx);
     }

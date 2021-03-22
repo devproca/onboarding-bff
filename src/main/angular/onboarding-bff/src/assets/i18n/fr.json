@@ -21,13 +21,27 @@
     "USERNAME": "Nom d'utilisateur",
     "BTNCANCEL": "Annuler",
     "BTNSAVE": "Sauvegarder",
+    "BTNADDPHONE": "Ajouter Téléphone",
     "FIRSTNAMEREQ": "Prénom  est obligatoire!",
     "FIRSTNAMEBAD": "Prénom est Interdit!",
     "LASTNAMEREQ": "Nom de famille  est obligatoire!",
     "USERNAMEREQ": "Nom d'utilisateur est obligatoire!",
-    "USERNAMEBAD": "Nom d'utilisateur est Interdit!"
+    "USERNAMEBAD": "Nom d'utilisateur est Interdit!",
+    "DELETEPHONE": "Supprimer Téléphone",
+    "EDITPHONE": "Modifier Téléphone",
+    "PHONETYPE": "Type de Téléphone",
+    "PHONENUMBER": "Numero de Téléphone",
+    "ACTION": "Action",
+    "CONFIRMDELETEPHONE": "Veuillez confirmer votre intention de supprimer le téléphone: "
   },
   "PAGENOTFOUND" : {
     "HEADER": "La page que vous recherchez n'a pu être trouvée"
+  },
+  "ADDPHONEMODAL": {
+    "BTNADD": "Ajouter",
+    "BTNCLOSE": "Fermer",
+    "PHONETYPE": "Type de Téléphone",
+    "PHONENUMBER": "Numero de Téléphone"
   }
+
 }
