@@ -1,0 +1,23 @@
+
+<div *ngIf="!loadingSubscription.closed">
+  LOADING!!!
+</div>
+
+<button (click)="createUser()">Create</button>
+
+<table>
+  <thead>
+  <tr>
+    <th>User name</th>
+    <th>First name</th>
+    <th>Last name</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of users">
+    <td>{{user.username}}</td>
+    <td>{{user.firstName}}</td>
+    <td>{{user.lastName}}</td>
+  </tr>
+  </tbody>
+</table>

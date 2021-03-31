@@ -1,0 +1,17 @@
+<div [formGroup]="formGroup">
+
+  <div>
+    <label>First name</label>
+    <input formControlName="firstName">
+  </div>
+  <div>
+    <label>Last name</label>
+    <input formControlName="lastName">
+  </div>
+  <div>
+    <label>User name</label>
+    <input formControlName="username">
+  </div>
+</div>
+
+<button (click)="createUser()">Submit</button>
