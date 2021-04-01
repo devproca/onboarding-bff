@@ -1,17 +1,23 @@
-<div [formGroup]="formGroup">
+<div class="m-10">
+  <div class="block">
+    <div class="block text-lg mb-4">New User Form</div>
 
-  <div>
-    <label>First name</label>
-    <input formControlName="firstName">
-  </div>
-  <div>
-    <label>Last name</label>
-    <input formControlName="lastName">
-  </div>
-  <div>
-    <label>User name</label>
-    <input formControlName="username">
+    <div class="block" [formGroup]="formGroup">
+      <div class="mb-3">
+        <label>First Name</label>
+        <input class="tw-input" formControlName="firstName">
+      </div>
+      <div class="mb-3">
+        <label>Last Name:</label>
+        <input class="tw-input" formControlName="lastName">
+      </div>
+      <div class="mb-3">
+        <label>Username:</label>
+        <input class="tw-input" formControlName="username">
+      </div>
+    </div>
+
+    <button class="btn btn-blue mt-3" (click)="createUser()">Submit</button>
+    <button class="btn btn-red ml-2" (click)="onCancel()">Cancel</button>
   </div>
 </div>
-
-<button (click)="createUser()">Submit</button>

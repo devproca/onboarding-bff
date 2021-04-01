@@ -1,32 +1,43 @@
-
 <div *ngIf="!loadingSubscription.closed">
   <tw-spinner size="md" spinnerStyle="style2"></tw-spinner>
 </div>
 
-<button (click)="createUser()">Create New User</button>
 
-<table>
-  <thead>
-  <tr>
-    <th>User Name</th>
-    <th>First Name</th>
-    <th>Last Name</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let user of users">
-    <td>{{ user.username }}</td>
-    <td>{{ user.firstName }}</td>
-    <td>{{ user.lastName }}</td>
+<div class="m-10">
+  <div class="flex">
+    <div class="text-lg mb-4">User List</div>
+    <button class="btn btn-blue ml-4" (click)="createUser()">Create User</button>
+  </div>
+  <div class="border rounded p-6">
 
-    <div *ngFor="let phoneNumber of user.phoneNumbers">
-      <div>{{ phoneNumber.phoneNumber }}</div>
-    </div>
+    <table class="user-list-table">
+      <thead>
+      <tr>
+        <th class="user-list-header">User Name</th>
+        <th class="user-list-header">First Name</th>
+        <th class="user-list-header">Last Name</th>
+        <th class="user-list-header">Actions</th> <!-- Button Sections Move to single column and fix sizing. -->
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users">
+        <td class="user-list-data">{{ user.username }}</td>
+        <td class="user-list-data">{{ user.firstName }}</td>
+        <td class="user-list-data">{{ user.lastName }}</td>
 
-    <div class="flex">
-      <img class="svgButton" src="../../assets/svg/edit.svg" (click)="editUser(user)">
-      <img class="svgButton delete ml-2" src="../../assets/svg/times.svg" (click)="deleteUser(user)">
-    </div>
-  </tr>
-  </tbody>
-</table>
+        <td class="user-list-data">
+          <div class="flex items-center justify-center">
+            <div class="w-4 mr-2 transform hover:scale-110">
+              <img class="svgButton" src="../../assets/svg/edit.svg" (click)="editUser(user)">
+            </div>
+            <div class="w-4 mr-2 transform hover:scale-110">
+              <img class="svgButton delete ml-2" src="../../assets/svg/trash.svg" (click)="deleteUser(user)">
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

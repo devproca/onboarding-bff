@@ -28,6 +28,10 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
+  onCancel(): void {
+    this.router.navigateByUrl("users");
+  }
+
   private createFormGroup(): FormGroup {
     return this.formBuilder.group({
       userId: '',

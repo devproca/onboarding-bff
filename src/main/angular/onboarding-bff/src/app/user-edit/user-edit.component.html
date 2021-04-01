@@ -1,16 +1,23 @@
-<div [formGroup]="formGroup">
-  <div>
-    <label>First name</label>
-    <input class="tw-input" formControlName="firstName">
-  </div>
-  <div>
-    <label>Last name</label>
-    <input class="tw-input" formControlName="lastName">
+<div class="m-10">
+  <div class="block">
+    <div class="block text-lg mb-4">Edit User: {{ username }}</div>
+    <div class="border rounded p-6">
+      <div [formGroup]="formGroup">
+        <div>
+          <label>First Name:</label>
+          <input class="tw-input mb-3" formControlName="firstName">
+        </div>
+        <div>
+          <label>Last Name:</label>
+          <input class="tw-input mb-3" formControlName="lastName">
+        </div>
+      </div>
+
+      <button class="btn btn-blue" (click)="onSave()">Save Changes</button>
+      <button class="btn btn-red ml-2" (click)="onCancel()">Cancel</button>
+    </div>
   </div>
 
+  PHONE NUMBER ADDING TEST
   <app-phone-detail></app-phone-detail>
-
 </div>
-
-<button class="btn btn-blue" (click)="onSave()">Save Changes</button>
-<button class="btn btn-red" (click)="onCancel()">Cancel</button>

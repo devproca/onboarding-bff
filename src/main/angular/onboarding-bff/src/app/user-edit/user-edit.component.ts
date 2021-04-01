@@ -13,6 +13,7 @@ import {UserModel} from "../model/user.model";
 export class UserEditComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   formGroup = this.createFormGroup();
+  username: string;
 
   constructor(private userService: UserService,
               private activatedRoute: ActivatedRoute,
@@ -40,6 +41,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.userService.get(userId).subscribe(user => {
         this.formGroup.patchValue(user);
+        this.username = user.username;
       })
     );
   }
