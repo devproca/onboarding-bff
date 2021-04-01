@@ -19,6 +19,10 @@
     <td>{{ user.firstName }}</td>
     <td>{{ user.lastName }}</td>
 
+    <div *ngFor="let phoneNumber of user.phoneNumbers">
+      <div>{{ phoneNumber.phoneNumber }}</div>
+    </div>
+
     <div class="flex">
       <img class="svgButton" src="../../assets/svg/edit.svg" (click)="editUser(user)">
       <img class="svgButton delete ml-2" src="../../assets/svg/times.svg" (click)="deleteUser(user)">

@@ -1,0 +1,14 @@
+<form>
+
+  <div [formGroup]="formGroup">
+    <label>Phone Number:</label>
+    <input class="tw-input"
+           formControlName="phoneNumber"
+           type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+           placeholder="306-123-4567"
+           maxlength="11">
+  </div>
+
+  <button class="btn btn-blue" (click)="createNumber()">Save</button>
+
+</form>

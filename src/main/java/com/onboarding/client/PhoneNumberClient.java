@@ -3,6 +3,7 @@ package com.onboarding.client;
 
 import com.onboarding.api.PhoneNumberDto;
 import com.onboarding.api.VerificationDto;
+
 import lombok.NonNull;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
+
 import java.util.List;
 import java.util.UUID;
 

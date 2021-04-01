@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {UserService} from "../service/user.service";
 import {UserModel} from "../model/user.model";
 import {Subscription} from "rxjs";
+import {PhoneNumberModel} from "../model/phone-number.model";
 
 
 @Component({
@@ -12,9 +13,10 @@ import {Subscription} from "rxjs";
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
+  loadingSubscription = Subscription.EMPTY;
 
   users: UserModel[] = [];
-  loadingSubscription = Subscription.EMPTY;
+  phoneNumbers: PhoneNumberModel[] = [];
 
   constructor(private userService: UserService,
               private router: Router) {
@@ -35,7 +37,7 @@ export class UserListComponent implements OnInit {
   }
 
   editUser(user: UserModel): void {
-    this.router.navigateByUrl(`/users/$(user.userId)`);
+    this.router.navigateByUrl("users/" + user.userId);
   }
 
   deleteUser(user: UserModel): void {

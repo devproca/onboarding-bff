@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UserService} from "../service/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import {FormGroup, FormBuilder, FormArray} from "@angular/forms";
 import {UserModel} from "../model/user.model";
 
 @Component({
@@ -44,15 +44,6 @@ export class UserEditComponent implements OnInit, OnDestroy {
     );
   }
 
-  private createFormGroup(): FormGroup {
-    return this.formBuilder.group({
-      userId: '',
-      firstName: '',
-      lastName: '',
-      username: ''
-    });
-  }
-
   onSave(): void {
     const user = this.formGroup.value as UserModel;
 
@@ -65,5 +56,14 @@ export class UserEditComponent implements OnInit, OnDestroy {
 
   onCancel(): void {
     this.router.navigateByUrl("users");
+  }
+
+  private createFormGroup(): FormGroup {
+    return this.formBuilder.group({
+      userId: '',
+      firstName: '',
+      lastName: '',
+      username: ''
+    });
   }
 }

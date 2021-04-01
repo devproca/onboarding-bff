@@ -17,8 +17,7 @@ export class UserDetailComponent implements OnInit {
               private userService: UserService,
               private router: Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   createUser(): void {
     const user = this.formGroup.value as UserModel;

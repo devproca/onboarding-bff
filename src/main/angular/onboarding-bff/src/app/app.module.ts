@@ -9,6 +9,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { SpinnerComponent } from './angular-components/spinner/spinner.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { PhoneDetailComponent } from './phone-detail/phone-detail.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     UserListComponent,
     UserDetailComponent,
     SpinnerComponent,
-    UserEditComponent
+    UserEditComponent,
+    PhoneDetailComponent
   ],
   imports: [
     BrowserModule,
