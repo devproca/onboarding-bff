@@ -1,0 +1,13 @@
+<div [formGroup]="formGroup">
+  <div>
+    <label>First name</label>
+    <input class="tw-input" formControlName="firstName">
+  </div>
+  <div>
+    <label>Last name</label>
+    <input class="tw-input" formControlName="lastName">
+  </div>
+</div>
+
+<button class="btn btn-blue" (click)="onSave()">Save Changes</button>
+<button class="btn btn-red" (click)="onCancel()">Cancel</button>

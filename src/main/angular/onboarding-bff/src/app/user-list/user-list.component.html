@@ -3,21 +3,22 @@
   <tw-spinner size="md" spinnerStyle="style2"></tw-spinner>
 </div>
 
-<button (click)="createUser()">Create</button>
+<button (click)="createUser()">Create New User</button>
 
 <table>
   <thead>
   <tr>
-    <th>User name</th>
-    <th>First name</th>
-    <th>Last name</th>
+    <th>User Name</th>
+    <th>First Name</th>
+    <th>Last Name</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let user of users">
-    <td>{{user.username}}</td>
-    <td>{{user.firstName}}</td>
-    <td>{{user.lastName}}</td>
+    <td>{{ user.username }}</td>
+    <td>{{ user.firstName }}</td>
+    <td>{{ user.lastName }}</td>
+    <img class="svgButton" src="../../assets/svg/edit.svg" (click)="editUser(user)">
   </tr>
   </tbody>
 </table>

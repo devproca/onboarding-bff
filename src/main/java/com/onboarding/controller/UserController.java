@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -21,6 +22,17 @@ public class UserController {
         return userClient.create(dto);
     }
 
+    @PutMapping("/{userId}")
+    public UserDto update(@PathVariable("userId") UUID userId, @RequestBody UserDto dto) {
+        dto.setUserId(userId);
+        return userClient.update(dto);
+    }
+
     @GetMapping()
     public List<UserDto> findAll() { return userClient.findAll(); }
+
+    @GetMapping("/{userId}")
+    public UserDto get(@PathVariable("userId") UUID userId) {
+        return userClient.get(userId);
+    }
 }

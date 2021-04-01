@@ -3,6 +3,56 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+//// INPUTS ////
+.shadow-focus {
+  box-shadow: 0px 0px 0px 3px rgba(66, 153, 225, 0.35);
+}
+
+.tw-input {
+  @apply appearance-none outline-none leading-none px-3 h-8 text-sm bg-white border border-solid border-gray-400 rounded w-full text-gray-900;
+  box-sizing: border-box;
+  transition: border-color 150ms ease-in, box-shadow 150ms ease-in;
+}
+
+.tw-input-focus {
+  @apply shadow-focus border-blue-500;
+}
+
+.tw-input:focus {
+  @apply tw-input-focus;
+}
+
+
+//// BUTTONS ////
+.btn {
+  @apply h-8 px-4 text-sm rounded cursor-pointer leading-none;
+  transition: background-color 150ms ease-in;
+}
+
+.btn.btn-blue {
+  @apply bg-blue-500 text-white;
+  box-shadow: inset 0px 0px 6px 0px #3182CE;
+}
+
+.btn.btn-blue:hover,
+.btn.btn-blue:focus {
+  @apply bg-blue-600;
+}
+
+.btn.btn-blue:active {
+  @apply bg-blue-700;
+}
+
+.btn.btn-red {
+  @apply bg-red-500 text-white;
+  box-shadow: inset 0px 0px 6px 0px #e53e3e;
+}
+
+.btn.btn-red:hover,
+.btn.btn-red:focus {
+  @apply bg-red-600;
+}
+
+.btn.btn-red:active {
+  @apply bg-red-700;
+}

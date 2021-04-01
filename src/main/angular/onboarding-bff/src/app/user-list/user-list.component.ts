@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
+
 import {UserService} from "../service/user.service";
 import {UserModel} from "../model/user.model";
 import {Subscription} from "rxjs";
-import {Router} from "@angular/router";
+
 
 @Component({
   selector: 'app-user-list',
@@ -25,5 +27,9 @@ export class UserListComponent implements OnInit {
 
   createUser(): void {
     this.router.navigateByUrl("/users/create");
+  }
+
+  editUser(user: UserModel): void {
+    this.router.navigateByUrl("users/" + user.userId);
   }
 }
