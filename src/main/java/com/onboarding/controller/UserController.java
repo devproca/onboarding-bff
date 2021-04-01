@@ -28,11 +28,17 @@ public class UserController {
         return userClient.update(dto);
     }
 
-    @GetMapping()
-    public List<UserDto> findAll() { return userClient.findAll(); }
+    @DeleteMapping("/{userId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable("userId") UUID userId) {
+        userClient.delete(userId);
+    }
 
     @GetMapping("/{userId}")
     public UserDto get(@PathVariable("userId") UUID userId) {
         return userClient.get(userId);
     }
+
+    @GetMapping()
+    public List<UserDto> findAll() { return userClient.findAll(); }
 }

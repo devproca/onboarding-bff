@@ -1,3 +1,7 @@
 .svgButton {
   @apply h-4 w-4;
 }
+
+.svgButton.delete {
+  @apply h-5 w-5
+}

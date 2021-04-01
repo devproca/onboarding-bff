@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 
 import {UserService} from "../service/user.service";
@@ -17,9 +17,14 @@ export class UserListComponent implements OnInit {
   loadingSubscription = Subscription.EMPTY;
 
   constructor(private userService: UserService,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit(): void {
+    this.loadUsers();
+  }
+
+  loadUsers(): void {
     this.loadingSubscription = this.userService.findAll().subscribe(users => {
       this.users = users;
     })
@@ -30,6 +35,10 @@ export class UserListComponent implements OnInit {
   }
 
   editUser(user: UserModel): void {
-    this.router.navigateByUrl("users/" + user.userId);
+    this.router.navigateByUrl(`/users/$(user.userId)`);
+  }
+
+  deleteUser(user: UserModel): void {
+    this.userService.delete(user.userId).subscribe(() => this.loadUsers());
   }
 }

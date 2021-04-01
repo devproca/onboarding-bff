@@ -18,7 +18,11 @@
     <td>{{ user.username }}</td>
     <td>{{ user.firstName }}</td>
     <td>{{ user.lastName }}</td>
-    <img class="svgButton" src="../../assets/svg/edit.svg" (click)="editUser(user)">
+
+    <div class="flex">
+      <img class="svgButton" src="../../assets/svg/edit.svg" (click)="editUser(user)">
+      <img class="svgButton delete ml-2" src="../../assets/svg/times.svg" (click)="deleteUser(user)">
+    </div>
   </tr>
   </tbody>
 </table>

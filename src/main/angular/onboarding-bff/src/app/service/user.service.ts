@@ -28,4 +28,8 @@ export class UserService {
   findAll(): Observable<UserModel[]> {
     return this.http.get<UserModel[]>(BASE_URI);
   }
+
+  delete(userId: string): Observable<UserModel> {
+    return this.http.delete<UserModel>(`${BASE_URI}/${userId}`);
+  }
 }
