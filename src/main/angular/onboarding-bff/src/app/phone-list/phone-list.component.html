@@ -1,1 +1,28 @@
-Given User Id: {{ userId }}
+<tw-dialog-header>Phone Numbers for {{ fullUser.firstName + ' ' + fullUser.lastName }}</tw-dialog-header>
+
+<tw-dialog-body>
+
+  <table class="user-list-table">
+    <thead>
+    <tr>
+      <th class="user-list-header">Phone Number</th>
+      <th class="user-list-header">Verified</th>
+      <th class="user-list-header">Actions</th> <!-- Button Sections Move to single column and fix sizing. -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let phonenumber of phoneNumbers">
+      <td class="user-list-data">{{ phonenumber.phoneNumber }}</td>
+      <td class="user-list-data">{{ phonenumber.verified }}</td>
+      <td class="user-list-data">ACTIONS</td>
+    </tr>
+    </tbody>
+  </table>
+
+</tw-dialog-body>
+
+<!--<tw-dialog-footer>-->
+<!--  <div class="flex justify-end">-->
+<!--    <button class="btn btn-blue" (click)="closeDialog()">Close</button>-->
+<!--  </div>-->
+<!--</tw-dialog-footer>-->

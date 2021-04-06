@@ -12,6 +12,11 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { PhoneDetailComponent } from './phone-detail/phone-detail.component';
 import { PopperComponent } from './angular-components/popper/popper.component';
 import { PhoneListComponent } from './phone-list/phone-list.component';
+import { DialogBodyComponent } from './angular-components/dialog-body/dialog-body.component';
+import { DialogFooterComponent } from './angular-components/dialog-footer/dialog-footer.component';
+import { DialogHeaderComponent } from './angular-components/dialog-header/dialog-header.component';
+import { DialogComponent } from './angular-components/dialog/dialog.component';
+import { SvgComponent } from './angular-components/svg/svg.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,12 @@ import { PhoneListComponent } from './phone-list/phone-list.component';
     UserEditComponent,
     PhoneDetailComponent,
     PopperComponent,
-    PhoneListComponent
+    PhoneListComponent,
+    DialogBodyComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent,
+    DialogComponent,
+    SvgComponent
   ],
   imports: [
     BrowserModule,

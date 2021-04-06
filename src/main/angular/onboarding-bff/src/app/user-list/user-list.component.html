@@ -28,10 +28,9 @@
           <div class="flex items-center justify-center">
 
             <div class="actions">
-              <tw-popper>
-                <img class="svgButton" src="../../assets/svg/phone.svg">
-                <app-phone-list userId="{{ user.userId }}"></app-phone-list>
-              </tw-popper>
+                <img class="svgButton" (click)="openDialog(user)" src="../../assets/svg/phone.svg">
+<!--                <img class="svgButton" src="../../assets/svg/phone.svg">-->
+<!--                <app-phone-list userId="{{ user.userId }}"></app-phone-list>-->
             </div>
 
             <div class="actions">

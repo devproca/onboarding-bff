@@ -5,6 +5,9 @@ import {UserService} from "../service/user.service";
 import {UserModel} from "../model/user.model";
 import {Subscription} from "rxjs";
 import {PopperComponent} from "../angular-components/popper/popper.component";
+import {DialogService} from "../angular-components/dialog/dialog.service";
+import {PhoneListComponent} from "../phone-list/phone-list.component";
+import {DialogConfig} from "../angular-components/dialog/dialog-config.model";
 
 
 @Component({
@@ -20,7 +23,8 @@ export class UserListComponent implements OnInit {
   users: UserModel[] = [];
 
   constructor(private userService: UserService,
-              private router: Router) {
+              private router: Router,
+              private dialogService: DialogService) {
   }
 
   ngOnInit(): void {
@@ -47,5 +51,17 @@ export class UserListComponent implements OnInit {
 
   handleCancelDelete() {
     this.deletePopper.hide();
+  }
+
+  openDialog(user: UserModel): void {
+    this.dialogService.open(PhoneListComponent, {
+      data: {
+        userId: user.userId,
+        user: user
+      },
+      size: 'sm'
+    } as DialogConfig).onClosed(result => {
+      console.log('Closed with result', result);
+      });
   }
 }
