@@ -19,7 +19,11 @@
 }
 
 .delete-confirm {
-  @apply flex-wrap rounded shadow-md bg-white font-sans text-xs p-3 overflow-x-hidden;
-  width: 17.5rem;
+  @apply block rounded shadow-md bg-white font-sans text-xs text-center p-3 overflow-x-hidden;
+  width: 10rem;
   box-sizing: content-box;
+}
+
+.actions {
+  @apply w-4 mr-2 transform hover:scale-110;
 }

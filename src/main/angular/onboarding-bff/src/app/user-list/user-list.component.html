@@ -27,16 +27,27 @@
 
         <td class="user-list-data">
           <div class="flex items-center justify-center">
-            <div class="w-4 mr-2 transform hover:scale-110">
-              <img class="svgButton" src="../../assets/svg/edit.svg" (click)="editUser(user)">
+
+            <div class="actions">
+              <tw-popper>
+                <img class="svgButton" src="../../assets/svg/phone.svg">
+                <tw-spinner></tw-spinner> <!-- Placeholder for future phone list component. -->
+              </tw-popper>
             </div>
 
-            <div class="w-4 mr-2 transform hover:scale-110">
+            <div class="actions">
+              <img class="svgButton ml-1" src="../../assets/svg/edit.svg" (click)="editUser(user)">
+            </div>
+
+            <div class="actions">
               <tw-popper>
                 <img class="svgButton delete ml-2" src="../../assets/svg/trash.svg">
                 <div class="delete-confirm">
                   Are you sure you want to delete this user?
-                  <button class="btn btn-red" (click)="deleteUser(user)">Yes</button>
+                  <div class="block">
+                    <button class="btn btn-red" (click)="deleteUser(user)">Yes</button>
+                    <button class="btn btn-blue ml-2" (click)="handleCancelDelete()">No</button>
+                  </div>
                 </div>
               </tw-popper>
             </div>
