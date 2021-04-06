@@ -15,7 +15,7 @@
         <th class="user-list-header">User Name</th>
         <th class="user-list-header">First Name</th>
         <th class="user-list-header">Last Name</th>
-        <th class="user-list-header">Actions</th> <!-- Button Sections Move to single column and fix sizing. -->
+        <th class="user-list-header">Actions</th>
       </tr>
       </thead>
       <tbody>
@@ -26,11 +26,8 @@
 
         <td class="user-list-data">
           <div class="flex items-center justify-center">
-
             <div class="actions">
-                <img class="svgButton" (click)="openDialog(user)" src="../../assets/svg/phone.svg">
-<!--                <img class="svgButton" src="../../assets/svg/phone.svg">-->
-<!--                <app-phone-list userId="{{ user.userId }}"></app-phone-list>-->
+                <img class="svgButton" (click)="openPhoneDialog(user)" src="../../assets/svg/phone.svg">
             </div>
 
             <div class="actions">

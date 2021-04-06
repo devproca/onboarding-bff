@@ -50,11 +50,11 @@ public class PhoneNumberController {
 
     @PostMapping("/{phoneId}/initiateVerification")
     public void sendVerifyCode(@PathVariable("userId") UUID userId, @PathVariable("phoneId") UUID phoneId) {
-        // phoneClient.sendVerifyCode(userId, phoneId);
+        phoneClient.sendVerificationCode(userId, phoneId);
     }
 
     @PostMapping("/{phoneId}/verify")
     public void verifyCode(@RequestBody VerificationDto verifyDto, @PathVariable("userId") UUID userId, @PathVariable("phoneId") UUID phoneId) {
-        // phoneClient.verifyCode(verifyDto, userId, phoneId);
+        phoneClient.verifyCode(verifyDto, userId, phoneId);
     }
 }

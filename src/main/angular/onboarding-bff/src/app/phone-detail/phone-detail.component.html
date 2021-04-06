@@ -1,14 +1,11 @@
 <form>
-
-  <div [formGroup]="formGroup">
-    <label>Phone Number:</label>
-    <input class="tw-input"
+  <div class="flex items-center justify-center mb-2" [formGroup]="formGroup">
+    <div class="flex-1">Add Number:</div>
+    <input class="tw-input flex-1"
            formControlName="phoneNumber"
            type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-           placeholder="306-123-4567"
+           placeholder="3061234567"
            maxlength="11">
+    <button class="btn btn-blue ml-1" (click)="createNumber()">Save</button>
   </div>
-
-  <button class="btn btn-blue" (click)="createNumber()">Save</button>
-
 </form>

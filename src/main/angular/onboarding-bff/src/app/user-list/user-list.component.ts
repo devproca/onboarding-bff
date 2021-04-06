@@ -53,15 +53,10 @@ export class UserListComponent implements OnInit {
     this.deletePopper.hide();
   }
 
-  openDialog(user: UserModel): void {
+  openPhoneDialog(user: UserModel): void {
     this.dialogService.open(PhoneListComponent, {
-      data: {
-        userId: user.userId,
-        user: user
-      },
-      size: 'sm'
-    } as DialogConfig).onClosed(result => {
-      console.log('Closed with result', result);
-      });
+      data: { user: user },
+      size: 'lg'
+    });
   }
 }

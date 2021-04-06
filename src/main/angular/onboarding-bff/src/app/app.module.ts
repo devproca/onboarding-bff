@@ -17,6 +17,8 @@ import { DialogFooterComponent } from './angular-components/dialog-footer/dialog
 import { DialogHeaderComponent } from './angular-components/dialog-header/dialog-header.component';
 import { DialogComponent } from './angular-components/dialog/dialog.component';
 import { SvgComponent } from './angular-components/svg/svg.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { VerifyNumberComponent } from './verify-number/verify-number.component';
 
 @NgModule({
   declarations: [
@@ -32,13 +34,15 @@ import { SvgComponent } from './angular-components/svg/svg.component';
     DialogFooterComponent,
     DialogHeaderComponent,
     DialogComponent,
-    SvgComponent
+    SvgComponent,
+    VerifyNumberComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -62,14 +62,10 @@ public class PhoneNumberClient {
                 .post(Entity.json(null), VerificationDto.class);
     }
 
-    public PhoneNumberDto verifyCode(PhoneNumberDto phoneDto, VerificationDto verifyDto) {
-        phoneVerificationTarget(phoneDto.getUserId(), phoneDto.getPhoneId())
+    public PhoneNumberDto verifyCode(VerificationDto verifyDto, UUID userId, UUID phoneId) {
+        return phoneVerificationTarget(userId, phoneId)
                 .request()
-                .post(Entity.json(verifyDto), VerificationDto.class);
-
-        return phoneTarget(phoneDto.getUserId(), phoneDto.getPhoneId())
-                .request()
-                .get(PhoneNumberDto.class);
+                .post(Entity.json(verifyDto), PhoneNumberDto.class);
     }
 
     private WebTarget phoneTarget(@NonNull UUID userId) {

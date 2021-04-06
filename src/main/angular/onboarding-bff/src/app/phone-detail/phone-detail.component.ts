@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 
 import {PhoneService} from "../service/phone.service";
@@ -14,6 +14,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./phone-detail.component.scss']
 })
 export class PhoneDetailComponent implements OnInit, OnDestroy {
+  @Input() userId;
 
   private subscriptions: Subscription[] = [];
   formGroup = this.createFormGroup();
@@ -24,7 +25,11 @@ export class PhoneDetailComponent implements OnInit, OnDestroy {
               private router: Router) { }
 
   ngOnInit(): void {
-    this.acquireUser();
+    if (this.userId) {
+      this.patchForm(this.userId, null);
+    } else {
+      this.acquireUser();
+    }
   }
 
   ngOnDestroy(): void {
@@ -68,7 +73,7 @@ export class PhoneDetailComponent implements OnInit, OnDestroy {
       phoneId: '',
       userId: '',
       phoneNumber: '',
-      verified: ''
+      isVerified: ''
     });
   }
 }

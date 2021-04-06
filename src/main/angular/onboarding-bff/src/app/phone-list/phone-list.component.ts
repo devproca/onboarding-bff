@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, ViewChild} from '@angular/core';
 import {PhoneNumberModel} from "../model/phone-number.model";
 import {Subscription} from "rxjs";
 import {PhoneService} from "../service/phone.service";
 import {DialogConfig} from "../angular-components/dialog/dialog-config.model";
 import {DialogComponent} from "../angular-components/dialog/dialog.component";
 import {UserModel} from "../model/user.model";
+import {PopperComponent} from "../angular-components/popper/popper.component";
 
 
 @Component({
@@ -13,31 +14,31 @@ import {UserModel} from "../model/user.model";
   styleUrls: ['./phone-list.component.scss']
 })
 export class PhoneListComponent implements OnInit {
-
   loadingSubscription = Subscription.EMPTY;
-
   phoneNumbers: PhoneNumberModel[] = [];
-  @Input() userId: string;
-  @Input() fullUser: UserModel;
+
+  @Input() user: UserModel;
+  @ViewChild('refDelete') private deletePopper: PopperComponent;
 
   constructor(private phoneService: PhoneService,
-              private dialogConfig: DialogConfig,
-              private dialogComponent: DialogComponent) { }
+              private dialogConfig: DialogConfig) { }
 
   ngOnInit(): void {
-    this.userId = this.dialogConfig.data.userId;
-    this.fullUser = this.dialogConfig.data.user;
+    this.user = this.dialogConfig.data.user;
     this.loadPhoneNumbers();
   }
 
   loadPhoneNumbers(): void {
-    this.loadingSubscription = this.phoneService.findAll(this.userId).subscribe(phones => {
+    this.loadingSubscription = this.phoneService.findAll(this.user.userId).subscribe(phones => {
       this.phoneNumbers = phones;
     })
   }
 
-  // TODO: Remove redundant function if close button is not used in footer.
-  closeDialog(): void {
-    this.dialogComponent.close('SAVED');
+  deletePhoneNumber(phone: PhoneNumberModel): void {
+    this.phoneService.delete(phone.userId, phone.phoneId).subscribe(() => this.loadPhoneNumbers());
+  }
+
+  handleCancelDelete() {
+    this.deletePopper.hide();
   }
 }
