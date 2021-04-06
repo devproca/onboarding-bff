@@ -1,10 +1,9 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild, ViewRef} from '@angular/core';
 import {Router} from "@angular/router";
 
 import {UserService} from "../service/user.service";
 import {UserModel} from "../model/user.model";
 import {Subscription} from "rxjs";
-import {PhoneNumberModel} from "../model/phone-number.model";
 import {PopperComponent} from "../angular-components/popper/popper.component";
 
 
@@ -14,12 +13,11 @@ import {PopperComponent} from "../angular-components/popper/popper.component";
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  @ViewChild(PopperComponent) private popper: PopperComponent;
+  @ViewChild('refDelete') private deletePopper: PopperComponent;
 
   loadingSubscription = Subscription.EMPTY;
 
   users: UserModel[] = [];
-  phoneNumbers: PhoneNumberModel[] = [];
 
   constructor(private userService: UserService,
               private router: Router) {
@@ -48,6 +46,6 @@ export class UserListComponent implements OnInit {
   }
 
   handleCancelDelete() {
-    this.popper.hide();
+    this.deletePopper.hide();
   }
 }

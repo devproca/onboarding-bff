@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 
-import {Observable} from "rxjs";
+import { Observable } from "rxjs";
 
-import {PhoneNumberModel} from "../model/phone-number.model";
+import { PhoneNumberModel}  from "../model/phone-number.model";
 
 
 const BASE_URI = "./api/v1/users";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class PhoneService {
 
   constructor(private http: HttpClient) { }
@@ -26,10 +24,10 @@ export class PhoneService {
   get(userId: string, phoneId: string): Observable<PhoneNumberModel> {
     return this.http.get<PhoneNumberModel> (`${BASE_URI}/${userId}/phonenumbers/${phoneId}`);
   }
-  //
-  // findAll(): Observable<UserModel[]> {
-  //   return this.http.get<UserModel[]>(BASE_URI);
-  // }
+
+  findAll(userId: string): Observable<PhoneNumberModel[]> {
+    return this.http.get<PhoneNumberModel[]>(`${BASE_URI}/${userId}/phonenumbers`);
+  }
   //
   // delete(userId: string): Observable<UserModel> {
   //   return this.http.delete<UserModel>(`${BASE_URI}/${userId}`);

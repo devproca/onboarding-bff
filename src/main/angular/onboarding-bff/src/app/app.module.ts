@@ -11,6 +11,7 @@ import { SpinnerComponent } from './angular-components/spinner/spinner.component
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { PhoneDetailComponent } from './phone-detail/phone-detail.component';
 import { PopperComponent } from './angular-components/popper/popper.component';
+import { PhoneListComponent } from './phone-list/phone-list.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PopperComponent } from './angular-components/popper/popper.component';
     SpinnerComponent,
     UserEditComponent,
     PhoneDetailComponent,
-    PopperComponent
+    PopperComponent,
+    PhoneListComponent
   ],
   imports: [
     BrowserModule,

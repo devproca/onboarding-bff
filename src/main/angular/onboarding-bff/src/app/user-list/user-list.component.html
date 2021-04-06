@@ -2,7 +2,6 @@
   <tw-spinner size="md" spinnerStyle="style2"></tw-spinner>
 </div>
 
-
 <div class="m-10">
   <div class="flex">
     <div class="text-lg mb-4">User List</div>
@@ -31,7 +30,7 @@
             <div class="actions">
               <tw-popper>
                 <img class="svgButton" src="../../assets/svg/phone.svg">
-                <tw-spinner></tw-spinner> <!-- Placeholder for future phone list component. -->
+                <app-phone-list userId="{{ user.userId }}"></app-phone-list>
               </tw-popper>
             </div>
 
@@ -40,7 +39,7 @@
             </div>
 
             <div class="actions">
-              <tw-popper>
+              <tw-popper #refDelete>
                 <img class="svgButton delete ml-2" src="../../assets/svg/trash.svg">
                 <div class="delete-confirm">
                   Are you sure you want to delete this user?
