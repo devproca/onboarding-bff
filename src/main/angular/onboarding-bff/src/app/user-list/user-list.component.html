@@ -30,8 +30,15 @@
             <div class="w-4 mr-2 transform hover:scale-110">
               <img class="svgButton" src="../../assets/svg/edit.svg" (click)="editUser(user)">
             </div>
+
             <div class="w-4 mr-2 transform hover:scale-110">
-              <img class="svgButton delete ml-2" src="../../assets/svg/trash.svg" (click)="deleteUser(user)">
+              <tw-popper>
+                <img class="svgButton delete ml-2" src="../../assets/svg/trash.svg">
+                <div class="delete-confirm">
+                  Are you sure you want to delete this user?
+                  <button class="btn btn-red" (click)="deleteUser(user)">Yes</button>
+                </div>
+              </tw-popper>
             </div>
           </div>
         </td>

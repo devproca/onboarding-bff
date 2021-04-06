@@ -10,6 +10,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { SpinnerComponent } from './angular-components/spinner/spinner.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { PhoneDetailComponent } from './phone-detail/phone-detail.component';
+import { PopperComponent } from './angular-components/popper/popper.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { PhoneDetailComponent } from './phone-detail/phone-detail.component';
     UserDetailComponent,
     SpinnerComponent,
     UserEditComponent,
-    PhoneDetailComponent
+    PhoneDetailComponent,
+    PopperComponent
   ],
   imports: [
     BrowserModule,

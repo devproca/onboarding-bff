@@ -17,3 +17,9 @@
 .user-list-data {
   @apply px-5 py-5 border-b border-gray-200 bg-white text-sm w-2/5;
 }
+
+.delete-confirm {
+  @apply flex-wrap rounded shadow-md bg-white font-sans text-xs p-3 overflow-x-hidden;
+  width: 17.5rem;
+  box-sizing: content-box;
+}
