@@ -1,19 +1,19 @@
 <tw-dialog-header>Phone Numbers for {{ user.firstName + ' ' + user.lastName }}</tw-dialog-header>
 <tw-dialog-body>
   <app-phone-detail userId="{{user.userId}}"></app-phone-detail>
-  <table class="user-list-table">
+  <table class="list-table">
     <thead>
     <tr>
-      <th class="user-list-header">Phone Number</th>
-      <th class="user-list-header">Verified</th>
-      <th class="user-list-header">Actions</th>
+      <th class="list-header">Phone Number</th>
+      <th class="list-header">Verified</th>
+      <th class="list-header">Actions</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let phonenumber of phoneNumbers">
-      <td class="user-list-data">{{ phonenumber.phoneNumber }}</td>
+      <td class="list-data">{{ phonenumber.phoneNumber }}</td>
 
-      <td class="user-list-data">
+      <td class="list-data">
         <div *ngIf="phonenumber.isVerified; else unVerified">
           <img class="svgButton" src="../../assets/svg/check.svg">
         </div>
@@ -22,7 +22,7 @@
         </ng-template>
       </td>
 
-      <td class="user-list-data">
+      <td class="list-data">
         <div class="flex items-center justify-center">
           <div class="actions">
             <tw-popper>
@@ -37,7 +37,7 @@
           <div class="actions">
             <tw-popper #refDelete>
               <img class="svgButton delete ml-1" src="../../assets/svg/trash.svg">
-              <div class="delete-confirm">
+              <div class="popper">
                 Are you sure you want to delete this number?
                 <div class="block">
                   <button class="btn btn-red" (click)="deletePhoneNumber(phonenumber)">Yes</button>

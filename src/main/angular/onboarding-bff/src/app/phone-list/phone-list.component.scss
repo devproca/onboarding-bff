@@ -1,1 +1,9 @@
 @import "../user-list/user-list.component";
+
+tw-dialog-header {
+  @apply text-gray-600 font-semibold;
+}
+
+tw-dialog-body {
+  @apply mr-10 ml-10;
+}

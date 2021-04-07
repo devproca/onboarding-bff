@@ -6,15 +6,15 @@
   @apply h-5 w-5 text-gray-200;
 }
 
-.user-list-table {
+.list-table {
   @apply min-w-full leading-normal;
 }
 
-.user-list-header {
+.list-header {
   @apply px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-xs text-left font-semibold text-gray-600 uppercase;
 }
 
-.user-list-data {
+.list-data {
   @apply px-5 py-5 border-b border-gray-200 bg-white text-sm w-2/5;
 }
 
