@@ -1,11 +1,11 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 
-import {PhoneService} from "../service/phone.service";
-import {UserModel} from "../model/user.model";
-import {PhoneNumberModel} from "../model/phone-number.model";
-import {Subscription} from "rxjs";
-import {ActivatedRoute, Router} from "@angular/router";
+import { Subscription } from "rxjs";
+
+import { PhoneService } from "../service/phone.service";
+import { PhoneNumberModel } from "../model/phone-number.model";
 
 
 @Component({
@@ -16,36 +16,38 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class PhoneDetailComponent implements OnInit, OnDestroy {
   @Input() userId;
 
-  private subscriptions: Subscription[] = [];
   formGroup = this.createFormGroup();
+
+  private subscriptions: Subscription[] = [];
 
   constructor(private formBuilder: FormBuilder,
               private phoneService: PhoneService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit(): void {
-    if (this.userId) {
-      this.patchForm(this.userId, null);
-    } else {
-      this.acquireUser();
-    }
+    // if (this.userId) {
+    this.patchForm(this.userId, null);
+    // } else {
+    //   this.acquireUser();
+    // }
   }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
   }
 
-  acquireUser(): void {
-    this.subscriptions.push(
-      this.activatedRoute.paramMap.subscribe(p => {
-        const userId = p.get("userId");
-        const phoneId = p.get("phoneId");
-
-        this.patchForm(userId, phoneId)
-        }
-      ));
-  }
+  // acquireUser(): void {
+  //   this.subscriptions.push(
+  //     this.activatedRoute.paramMap.subscribe(p => {
+  //       const userId = p.get("userId");
+  //       const phoneId = p.get("phoneId");
+  //
+  //       this.patchForm(userId, phoneId)
+  //       }
+  //     ));
+  // }
 
   patchForm(userId: string, phoneId: string): void {
     if (phoneId) {
@@ -54,7 +56,7 @@ export class PhoneDetailComponent implements OnInit, OnDestroy {
       })
     } else {
       this.formGroup.reset();
-      this.formGroup.patchValue({"userId": userId });
+      this.formGroup.patchValue({"userId": userId});
     }
   }
 
@@ -62,10 +64,15 @@ export class PhoneDetailComponent implements OnInit, OnDestroy {
     const phoneNumber = this.formGroup.value as PhoneNumberModel;
 
     this.phoneService.create(phoneNumber).subscribe(_ => {
-      this.router.navigateByUrl("users/" + phoneNumber.userId);
+      //this.router.navigateByUrl("users/" + phoneNumber.userId);
     }, error => {
-      //this is where you would handle a 400 like a validation error
+      const errors = error.error;
+      Object.keys(errors).forEach(key => this.formGroup.get(key).setErrors({"error": errors[key]}));
     });
+  }
+
+  get phoneValidator(): FormControl {
+    return this.formGroup.get("phoneNumber") as FormControl;
   }
 
   private createFormGroup(): FormGroup {

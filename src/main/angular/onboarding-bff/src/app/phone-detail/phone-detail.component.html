@@ -8,4 +8,5 @@
            maxlength="11">
     <button class="btn btn-blue ml-1" (click)="createNumber()">Save</button>
   </div>
+  <div class="validation-error" *ngIf="phoneValidator.errors">{{ phoneValidator.errors.error }}</div>
 </form>

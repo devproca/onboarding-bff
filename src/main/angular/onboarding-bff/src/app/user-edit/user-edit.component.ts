@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UserService} from "../service/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs";
-import {FormGroup, FormBuilder, FormArray} from "@angular/forms";
+import {FormGroup, FormBuilder, FormArray, FormControl} from "@angular/forms";
 import {UserModel} from "../model/user.model";
 
 @Component({
@@ -52,12 +52,21 @@ export class UserEditComponent implements OnInit, OnDestroy {
     this.userService.update(user).subscribe(_ => {
       this.router.navigateByUrl("users");
     }, error => {
-      //this is where you would handle a 400 like a validation error
+      const errors = error.error;
+      Object.keys(errors).forEach(key => this.formGroup.get(key).setErrors({"error": errors[key]}));
     });
   }
 
   onCancel(): void {
     this.router.navigateByUrl("users");
+  }
+
+  get firstNameValidator(): FormControl {
+    return this.formGroup.get("firstName") as FormControl;
+  }
+
+  get lastNameValidator(): FormControl {
+    return this.formGroup.get("lastName") as FormControl;
   }
 
   private createFormGroup(): FormGroup {
