@@ -2,7 +2,7 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 
-import { Subscription } from "rxjs";
+import { Subscription} from "rxjs";
 
 import { PhoneService } from "../service/phone.service";
 import { PhoneNumberModel } from "../model/phone-number.model";
@@ -27,27 +27,12 @@ export class PhoneDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // if (this.userId) {
     this.patchForm(this.userId, null);
-    // } else {
-    //   this.acquireUser();
-    // }
   }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
   }
-
-  // acquireUser(): void {
-  //   this.subscriptions.push(
-  //     this.activatedRoute.paramMap.subscribe(p => {
-  //       const userId = p.get("userId");
-  //       const phoneId = p.get("phoneId");
-  //
-  //       this.patchForm(userId, phoneId)
-  //       }
-  //     ));
-  // }
 
   patchForm(userId: string, phoneId: string): void {
     if (phoneId) {
@@ -64,11 +49,11 @@ export class PhoneDetailComponent implements OnInit, OnDestroy {
     const phoneNumber = this.formGroup.value as PhoneNumberModel;
 
     this.phoneService.create(phoneNumber).subscribe(_ => {
-      //this.router.navigateByUrl("users/" + phoneNumber.userId);
-    }, error => {
-      const errors = error.error;
-      Object.keys(errors).forEach(key => this.formGroup.get(key).setErrors({"error": errors[key]}));
-    });
+      },
+      error => {
+        const errors = error.error;
+        Object.keys(errors).forEach(key => this.formGroup.get(key).setErrors({"error": errors[key]}));
+      });
   }
 
   get phoneValidator(): FormControl {

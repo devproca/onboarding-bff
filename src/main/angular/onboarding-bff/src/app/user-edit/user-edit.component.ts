@@ -1,9 +1,12 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {UserService} from "../service/user.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+
 import {Subscription} from "rxjs";
-import {FormGroup, FormBuilder, FormArray, FormControl} from "@angular/forms";
-import {UserModel} from "../model/user.model";
+
+import { UserModel } from "../model/user.model";
+import { UserService } from "../service/user.service";
+
 
 @Component({
   selector: 'app-user-edit',
@@ -11,9 +14,10 @@ import {UserModel} from "../model/user.model";
   styleUrls: ['./user-edit.component.scss']
 })
 export class UserEditComponent implements OnInit, OnDestroy {
-  private subscriptions: Subscription[] = [];
   formGroup = this.createFormGroup();
   username: string;
+
+  private subscriptions: Subscription[] = [];
 
   constructor(private userService: UserService,
               private activatedRoute: ActivatedRoute,

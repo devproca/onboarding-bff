@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 import { PhoneNumberModel}  from "../model/phone-number.model";
-import {VerificationModel} from "../model/verification.model";
+import { VerificationModel } from "../model/verification.model";
 
 
 const BASE_URI = "./api/v1/users";
@@ -17,10 +17,6 @@ export class PhoneService {
   create(phone: PhoneNumberModel): Observable<PhoneNumberModel> {
     return this.http.post<PhoneNumberModel>(`${BASE_URI}/${phone.userId}/phonenumbers`, phone);
   }
-
-  // update(user: UserModel): Observable<UserModel> {
-  //   return this.http.put<UserModel>(`${BASE_URI}/${user.userId}`, user);
-  // }
 
   get(userId: string, phoneId: string): Observable<PhoneNumberModel> {
     return this.http.get<PhoneNumberModel> (`${BASE_URI}/${userId}/phonenumbers/${phoneId}`);
@@ -42,9 +38,6 @@ export class PhoneService {
   }
 
   verifyCode(verifyDto: VerificationModel, userId: string, phoneId: string): Observable<VerificationModel> {
-    // const userId = verifyDto.userId;
-    // const phoneId = verifyDto.phoneId
-
     return this.http.post<VerificationModel>(`${BASE_URI}/${userId}/phonenumbers/${phoneId}/verify`, verifyDto);
   }
 }

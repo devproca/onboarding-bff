@@ -16,10 +16,10 @@ import { PopperComponent } from "../angular-components/popper/popper.component";
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit, OnDestroy {
-  @ViewChild('refDelete') private deletePopper: PopperComponent;
-
   loadingSubscription = Subscription.EMPTY;
   users: UserModel[] = [];
+
+  @ViewChild('refDelete') private deletePopper: PopperComponent;
 
   constructor(private userService: UserService,
               private router: Router,

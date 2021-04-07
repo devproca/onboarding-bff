@@ -16,6 +16,7 @@ import javax.ws.rs.core.GenericType;
 import java.util.List;
 import java.util.UUID;
 
+
 public class PhoneNumberClient {
 
     @Setter
@@ -23,7 +24,9 @@ public class PhoneNumberClient {
 
     private Client client;
 
-    public PhoneNumberClient() { client  = ClientBuilder.newClient(); }
+    public PhoneNumberClient() {
+        client = ClientBuilder.newClient();
+    }
 
     public PhoneNumberDto create(PhoneNumberDto dto) {
         return phoneTarget(dto.getUserId())

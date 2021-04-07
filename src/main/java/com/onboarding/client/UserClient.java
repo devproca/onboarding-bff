@@ -12,6 +12,7 @@ import javax.ws.rs.core.GenericType;
 import java.util.List;
 import java.util.UUID;
 
+
 public class UserClient {
 
     @Setter

@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {PhoneNumberModel} from "../model/phone-number.model";
-import {PhoneService} from "../service/phone.service";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {VerificationModel} from "../model/verification.model";
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from "@angular/forms";
+
+import { PhoneNumberModel } from "../model/phone-number.model";
+import { PhoneService } from "../service/phone.service";
+import { VerificationModel } from "../model/verification.model";
 
 
 @Component({
@@ -11,13 +12,14 @@ import {VerificationModel} from "../model/verification.model";
   styleUrls: ['./verify-number.component.scss']
 })
 export class VerifyNumberComponent implements OnInit {
-  @Input() phoneNumber: PhoneNumberModel;
-
   applyCode = false;
   formGroup: FormGroup;
 
+  @Input() phoneNumber: PhoneNumberModel;
+
   constructor(private phoneService: PhoneService,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder) {
+  }
 
   ngOnInit(): void {
     this.formGroup = this.createFormGroup();

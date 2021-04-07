@@ -1,14 +1,12 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, of} from "rxjs";
-import {UserModel} from "../model/user.model";
-import {delay, map} from "rxjs/operators";
-import {HttpClient} from "@angular/common/http";
+import { Injectable}  from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { UserModel } from "../model/user.model";
+
 
 const BASE_URI = "./api/v1/users";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class UserService {
 
   constructor(private http: HttpClient) { }
@@ -22,7 +20,7 @@ export class UserService {
   }
 
   get(userId: string): Observable<UserModel> {
-    return this.http.get<UserModel> (`${BASE_URI}/${userId}`);
+    return this.http.get<UserModel>(`${BASE_URI}/${userId}`);
   }
 
   findAll(): Observable<UserModel[]> {

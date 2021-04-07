@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
@@ -40,5 +41,7 @@ public class UserController {
     }
 
     @GetMapping()
-    public List<UserDto> findAll() { return userClient.findAll(); }
+    public List<UserDto> findAll() {
+        return userClient.findAll();
+    }
 }

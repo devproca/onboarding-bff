@@ -1,11 +1,12 @@
-import {Component, OnInit, Input, ViewChild} from '@angular/core';
-import {PhoneNumberModel} from "../model/phone-number.model";
-import {Subscription} from "rxjs";
-import {PhoneService} from "../service/phone.service";
-import {DialogConfig} from "../angular-components/dialog/dialog-config.model";
-import {DialogComponent} from "../angular-components/dialog/dialog.component";
-import {UserModel} from "../model/user.model";
-import {PopperComponent} from "../angular-components/popper/popper.component";
+import { Component, OnInit, OnDestroy, Input, ViewChild } from '@angular/core';
+
+import { Subscription } from "rxjs";
+
+import { UserModel } from "../model/user.model";
+import { PhoneNumberModel } from "../model/phone-number.model";
+import { PhoneService } from "../service/phone.service";
+import { DialogConfig } from "../angular-components/dialog/dialog-config.model";
+import { PopperComponent } from "../angular-components/popper/popper.component";
 
 
 @Component({
@@ -13,7 +14,7 @@ import {PopperComponent} from "../angular-components/popper/popper.component";
   templateUrl: './phone-list.component.html',
   styleUrls: ['./phone-list.component.scss']
 })
-export class PhoneListComponent implements OnInit {
+export class PhoneListComponent implements OnInit, OnDestroy {
   loadingSubscription = Subscription.EMPTY;
   phoneNumbers: PhoneNumberModel[] = [];
 
@@ -21,11 +22,16 @@ export class PhoneListComponent implements OnInit {
   @ViewChild('refDelete') private deletePopper: PopperComponent;
 
   constructor(private phoneService: PhoneService,
-              private dialogConfig: DialogConfig) { }
+              private dialogConfig: DialogConfig) {
+  }
 
   ngOnInit(): void {
     this.user = this.dialogConfig.data.user;
     this.loadPhoneNumbers();
+  }
+
+  ngOnDestroy() {
+    this.loadingSubscription.unsubscribe();
   }
 
   loadPhoneNumbers(): void {
