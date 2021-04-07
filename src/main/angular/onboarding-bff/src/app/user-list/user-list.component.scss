@@ -35,3 +35,11 @@
 .noUsers {
   @apply flex items-center justify-center font-light text-3xl text-gray-300;
 }
+
+img {
+  fill: currentColor;
+}
+
+.noUsers-svg {
+  @apply mt-4 text-gray-200;
+}

@@ -2,7 +2,12 @@ import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 
 const SVGS = {
-  times: require('!!raw-loader?!../../../assets/svg/times.svg')
+  times: require('!!raw-loader?!../../../assets/svg/times.svg'),
+  edit: require('!!raw-loader?!../../../assets/svg/edit.svg'),
+  id: require('!!raw-loader?!../../../assets/svg/id.svg'),
+  nocontent: require('!!raw-loader?!../../../assets/svg/nocontent.svg'),
+  phone: require('!!raw-loader?!../../../assets/svg/phone.svg'),
+  trash: require('!!raw-loader?!../../../assets/svg/trash.svg')
 };
 
 @Component({
@@ -14,7 +19,7 @@ const SVGS = {
 export class SvgComponent implements OnInit {
 
   @Input() iconName: string;
-  @Input() size: 'xs' | 'sm' | 'md' = 'md';
+  @Input() size: 'xs' | 'sm' | 'md' | 'lg' = 'md';
 
   svg: SafeHtml;
 

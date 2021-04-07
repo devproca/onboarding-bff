@@ -55,8 +55,9 @@
   </div>
 
   <ng-template #noNumbers>
-    <div class="noNumbers">
-      {{ user.firstName }} has no saved phone numbers.
+    <div class="noNumbers">{{ user.firstName }} has no saved phone numbers.</div>
+    <div class="flex items-center justify-center">
+      <tw-svg class="noUsers-svg" size="lg" iconName="nocontent"></tw-svg>
     </div>
   </ng-template>
 </tw-dialog-body>
