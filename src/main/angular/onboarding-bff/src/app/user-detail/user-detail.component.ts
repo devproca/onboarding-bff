@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {UserService} from "../service/user.service";
-import {UserModel} from "../model/user.model";
-import {Router} from "@angular/router";
+import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import { Router } from "@angular/router";
+
+import { UserModel } from "../model/user.model";
+import { UserService } from "../service/user.service";
+
 
 @Component({
   selector: 'app-user-detail',
@@ -10,26 +12,41 @@ import {Router} from "@angular/router";
   styleUrls: ['./user-detail.component.scss']
 })
 export class UserDetailComponent implements OnInit {
-
   formGroup = this.createFormGroup();
 
-  constructor(private formBuilder: FormBuilder,
-              private userService: UserService,
-              private router: Router) { }
+  constructor(private userService: UserService,
+              private formBuilder: FormBuilder,
+              private router: Router) {
+  }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.formGroup = this.createFormGroup();
+  }
 
   createUser(): void {
     const user = this.formGroup.value as UserModel;
     this.userService.create(user).subscribe(_ => {
       this.router.navigateByUrl("users");
     }, error => {
-      //this is where you would handle a 400 like a validation error
+      const errors = error.error;
+      Object.keys(errors).forEach(key => this.formGroup.get(key).setErrors({"error": errors[key]}));
     });
   }
 
   onCancel(): void {
     this.router.navigateByUrl("users");
+  }
+
+  get firstNameValidator(): FormControl {
+    return this.formGroup.get("firstName") as FormControl;
+  }
+
+  get lastNameValidator(): FormControl {
+    return this.formGroup.get("lastName") as FormControl;
+  }
+
+  get usernameValidator(): FormControl {
+    return this.formGroup.get("username") as FormControl;
   }
 
   private createFormGroup(): FormGroup {

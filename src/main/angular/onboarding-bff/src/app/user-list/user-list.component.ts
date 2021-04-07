@@ -1,13 +1,13 @@
-import {Component, OnDestroy, OnInit, ViewChild, ViewRef} from '@angular/core';
-import {Router} from "@angular/router";
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from "@angular/router";
 
-import {UserService} from "../service/user.service";
-import {UserModel} from "../model/user.model";
-import {Subscription} from "rxjs";
-import {PopperComponent} from "../angular-components/popper/popper.component";
-import {DialogService} from "../angular-components/dialog/dialog.service";
-import {PhoneListComponent} from "../phone-list/phone-list.component";
-import {DialogConfig} from "../angular-components/dialog/dialog-config.model";
+import { Subscription } from "rxjs";
+
+import { UserModel } from "../model/user.model";
+import { UserService } from "../service/user.service";
+import { DialogService } from "../angular-components/dialog/dialog.service";
+import { PhoneListComponent } from "../phone-list/phone-list.component";
+import { PopperComponent } from "../angular-components/popper/popper.component";
 
 
 @Component({
@@ -15,11 +15,10 @@ import {DialogConfig} from "../angular-components/dialog/dialog-config.model";
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent implements OnInit, OnDestroy {
   @ViewChild('refDelete') private deletePopper: PopperComponent;
 
   loadingSubscription = Subscription.EMPTY;
-
   users: UserModel[] = [];
 
   constructor(private userService: UserService,
@@ -29,6 +28,10 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUsers();
+  }
+
+  ngOnDestroy() {
+    this.loadingSubscription.unsubscribe();
   }
 
   loadUsers(): void {

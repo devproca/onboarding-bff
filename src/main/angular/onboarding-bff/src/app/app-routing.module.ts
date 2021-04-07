@@ -1,10 +1,10 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {HashLocationStrategy, LocationStrategy} from "@angular/common";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { HashLocationStrategy, LocationStrategy } from "@angular/common";
 
 import { UserListComponent } from "./user-list/user-list.component";
 import { UserDetailComponent } from "./user-detail/user-detail.component";
-import {UserEditComponent} from "./user-edit/user-edit.component";
+import { UserEditComponent } from "./user-edit/user-edit.component";
 
 
 const routes: Routes = [
@@ -21,5 +21,4 @@ const routes: Routes = [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
   ]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule { }
