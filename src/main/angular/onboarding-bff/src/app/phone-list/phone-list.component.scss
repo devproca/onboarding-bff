@@ -1,7 +1,7 @@
 @import "../user-list/user-list.component";
 
 tw-dialog-header {
-  @apply text-gray-600 font-semibold;
+  @apply bg-blue-400 text-gray-700 font-semibold;
 }
 
 tw-dialog-body {
