@@ -31,3 +31,7 @@
 .actions {
   @apply w-4 mr-2 transform hover:scale-110;
 }
+
+.noUsers {
+  @apply flex items-center justify-center font-light text-3xl text-gray-300;
+}
