@@ -1,7 +1,6 @@
 package com.onboarding.client;
 
 import com.onboarding.api.UserDto;
-import lombok.NonNull;
 import lombok.Setter;
 
 import javax.ws.rs.client.Client;
@@ -12,55 +11,41 @@ import javax.ws.rs.core.GenericType;
 import java.util.List;
 import java.util.UUID;
 
-
 public class UserClient {
+
+    private final Client client;
 
     @Setter
     private String baseUri;
-
-    private Client client;
 
     public UserClient() {
         client = ClientBuilder.newClient();
     }
 
-    public UserDto create(UserDto dto) {
-        return userTarget()
+    public UserDto createUser(UserDto dto) {
+        return usersTarget()
                 .request()
                 .post(Entity.json(dto), UserDto.class);
     }
 
-    public UserDto update(UserDto dto) {
-        return userTarget(dto.getUserId())
-                .request()
-                .put(Entity.json(dto), UserDto.class);
-    }
-
-    public UserDto get(UUID userId) {
-        return userTarget(userId)
+    public UserDto getUser(UUID userId) {
+        return usersTarget(userId)
                 .request()
                 .get(UserDto.class);
     }
 
-    public void delete(UUID userId) {
-        userTarget(userId)
+    public List<UserDto> findAllUsers() {
+        return usersTarget()
                 .request()
-                .delete(Void.class);
+                .get(new GenericType<>(List.class){});
     }
 
-    public List<UserDto> findAll() {
-        return userTarget()
-                .request()
-                .get(new GenericType<>() {
-                });
-    }
-
-    private WebTarget userTarget(@NonNull UUID userId) {
-        return userTarget()
+    private WebTarget usersTarget(UUID userId) {
+        return usersTarget()
                 .path(userId.toString());
     }
 
-    private WebTarget userTarget() {
+    private WebTarget usersTarget() {
         return baseTarget()
                 .path("api")
                 .path("v1")

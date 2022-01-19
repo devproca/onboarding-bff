@@ -9,39 +9,27 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
-    private UserClient userClient;
+    private UserClient client;
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public UserDto create(@RequestBody UserDto dto) {
-        return userClient.create(dto);
-    }
-
-    @PutMapping("/{userId}")
-    public UserDto update(@PathVariable("userId") UUID userId, @RequestBody UserDto dto) {
-        dto.setUserId(userId);
-        return userClient.update(dto);
-    }
-
-    @DeleteMapping("/{userId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("userId") UUID userId) {
-        userClient.delete(userId);
+    @GetMapping("")
+    public List<UserDto> find() {
+        return client.findAllUsers();
     }
 
     @GetMapping("/{userId}")
-    public UserDto get(@PathVariable("userId") UUID userId) {
-        return userClient.get(userId);
+    public UserDto get(@PathVariable UUID userId) {
+        return client.getUser(userId);
     }
 
-    @GetMapping()
-    public List<UserDto> findAll() {
-        return userClient.findAll();
+    @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserDto create(@RequestBody UserDto dto) {
+        return client.createUser(dto);
     }
 }
+

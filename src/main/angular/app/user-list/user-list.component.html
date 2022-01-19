@@ -1,0 +1,19 @@
+
+<button (click)="createUser()">Create User</button>
+
+<table>
+  <tr>
+    <th>Email address</th>
+    <th>First name</th>
+    <th>Last name</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let user of users">
+    <td>{{user.emailAddress}}</td>
+    <td>{{user.firstName}}</td>
+    <td>{{user.lastName}}</td>
+    <td><button (click)="editUser(user)">Edit User</button>
+    </td>
+  </tr>
+</table>
+
