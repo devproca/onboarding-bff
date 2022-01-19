@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 import {UserModel} from "../model/user.model";
 import {HttpClient} from "@angular/common/http";
 
@@ -10,18 +10,17 @@ const BASE_URI = './api/users';
 })
 export class UserService {
 
+  private _users$ = new BehaviorSubject<UserModel[]>([]);
+  users$ = this._users$.asObservable();
+
   constructor(private httpClient: HttpClient) {
   }
 
-  find(): Observable<UserModel[]> {
-    return this.httpClient.get<UserModel[]>(BASE_URI);
+  load(): void {
+    this.httpClient.get<UserModel[]>(BASE_URI).subscribe(users => this._users$.next(users));
   }
 
-  get(userId: string): Observable<UserModel> {
-    return this.httpClient.get<UserModel>(`${BASE_URI}/${userId}`);
-  }
-
-  create(user: UserModel): Observable<UserModel> {
-    return this.httpClient.post<UserModel>(BASE_URI, user);
+  create(user: UserModel): void {
+    this.httpClient.post<UserModel>(BASE_URI, user).subscribe(_ => this.load());
   }
 }

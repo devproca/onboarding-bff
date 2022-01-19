@@ -1,7 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {UserModel} from "../model/user.model";
 import {UserService} from "../service/user.service";
-import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import {FormBuilder, FormGroup} from "@angular/forms";
 
@@ -10,21 +9,27 @@ import {FormBuilder, FormGroup} from "@angular/forms";
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.scss']
 })
-export class UserDetailComponent implements OnInit, OnDestroy {
+export class UserDetailComponent implements OnInit, OnDestroy, OnChanges {
+
+  @Input() selectedUser: UserModel | null = null;
 
   formGroup = this.createFormGroup();
   subscriptions: Subscription[] = [];
 
   constructor(private userService: UserService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
     this.subscribeToNoMiddleNameChanges();
-    this.subscribeToRouteParamChanges();
+  }
 
+  ngOnChanges(): void {
+    if (this.selectedUser) {
+      this.formGroup.patchValue(this.selectedUser);
+    } else {
+      this.formGroup.reset();
+    }
   }
 
   ngOnDestroy(): void {
@@ -33,10 +38,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
   save(): void {
     const valueToSave = this.formGroup.value as UserModel;
-    this.userService.create(valueToSave).subscribe(_ => this.router.navigateByUrl("/users"),
-      httpError => {
-        console.log("oh no!", httpError)
-      })
+    this.userService.create(valueToSave);
   }
 
   private createFormGroup(): FormGroup {
@@ -51,18 +53,6 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  private subscribeToRouteParamChanges(): void {
-    this.subscriptions.push(
-      this.activatedRoute.paramMap.subscribe(params => {
-        const userId = params.get("userId");
-        if (userId) {
-          this.refreshUser(userId);
-        } else {
-          this.formGroup.reset();
-        }
-      }));
-  }
-
   private subscribeToNoMiddleNameChanges(): void {
     this.subscriptions.push(
       this.formGroup.controls.noMiddleName.valueChanges.subscribe(value => {
@@ -73,9 +63,5 @@ export class UserDetailComponent implements OnInit, OnDestroy {
           this.formGroup.controls.middleName.enable();
         }
       }));
-  }
-
-  private refreshUser(userId: string) {
-    this.userService.get(userId).subscribe(user => this.formGroup.patchValue(user));
   }
 }

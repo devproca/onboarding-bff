@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, EventEmitter, Output} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserModel} from "../model/user.model";
 import {UserService} from "../service/user.service";
@@ -11,23 +11,26 @@ import {UserService} from "../service/user.service";
 export class UserListComponent implements OnInit {
 
   users: UserModel[] = [];
+  @Output() selectUser = new EventEmitter<UserModel | null>();
 
   constructor(private router: Router,
-              private userService: UserService) { }
+              private userService: UserService) {
+  }
 
   ngOnInit(): void {
-    this.refreshUsers();
+    this.userService.load();
+    this.subscribeToUserChanges();
   }
 
   createUser(): void {
-    this.router.navigateByUrl("/users/create");
+    this.selectUser.emit(null);
   }
 
   editUser(user: UserModel): void {
-    this.router.navigateByUrl(`/users/${user.userId}`);
+    this.selectUser.emit(user);
   }
 
-  private refreshUsers(): void {
-    this.userService.find().subscribe(users => this.users = users);
+  private subscribeToUserChanges(): void {
+    this.userService.users$.subscribe(users => this.users = users);
   }
 }
