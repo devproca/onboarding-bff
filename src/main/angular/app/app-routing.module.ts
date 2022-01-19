@@ -3,11 +3,29 @@ import {RouterModule, Routes} from '@angular/router';
 import {UserListComponent} from "./user-list/user-list.component";
 import {UserDetailComponent} from "./user-detail/user-detail.component";
 import {HashLocationStrategy, LocationStrategy} from "@angular/common";
+import {AuthGuard} from "./guard/auth.guard";
+import {LoginComponent} from "./login/login.component";
 
 const routes: Routes = [
-  {path: "users", component: UserListComponent},
-  {path: "users/create", component: UserDetailComponent},
-  {path: "users/:userId", component: UserDetailComponent}
+  {
+    path: "users",
+    component: UserListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "users/create",
+    component: UserDetailComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "users/:userId",
+    component: UserDetailComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "login",
+    component: LoginComponent,
+  }
 ];
 
 @NgModule({
